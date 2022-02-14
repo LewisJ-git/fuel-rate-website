@@ -1,18 +1,7 @@
 import React from "react";
-import axios from "axios";
 
 const QuoteHHistory = () => {
     const [customers, setCustomers] = React.useState([])
-
-    React.useEffect(() => {
-        getData()
-    }, [])
-
-    const getData = async () => {
-
-        const response = await axios.get(URL)
-        setCustomers(response.data)
-    }
 
     const renderHeader = () => {
         let headerElement = ['id', 'name', 'gallons requested', 'delivery address', 'delivery date', 'suggested price', 'total cost']
