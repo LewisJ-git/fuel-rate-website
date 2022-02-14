@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuoteHHistory = () => {
+const QuoteHistory = () => {
     const [customers, setCustomers] = React.useState([])
 
     const renderHeader = () => {
@@ -43,4 +43,4 @@ const QuoteHHistory = () => {
 }
 
 
-export default QuoteHHistory;
+export default QuoteHistory;

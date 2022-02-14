@@ -29,13 +29,13 @@ class Login extends Component {
                                     })
                                 }}>
                                 <input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     type='text' 
                                     value={this.state.loginUsername} 
                                     onChange={(event) => {this.setState({loginUsername: event.target.value})}}
                                     placeholder='Username'/>
                                 <input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     type='password' 
                                     value={this.state.loginPassword} 
                                     onChange={(event) => {this.setState({loginPassword: event.target.value})}}
@@ -64,19 +64,19 @@ class Login extends Component {
                                 }}>
                                 <label>Create username: </label>
                                 <input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     type='text' 
                                     value={this.state.registerUsername} 
                                     onChange={(event) => {this.setState({registerUsername: event.target.value})}}
                                     placeholder='Username'/>
                                 <input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     type='password' 
                                     value={this.state.registerPassword} 
                                     onChange={(event) => {this.setState({registerPassword: event.target.value})}}
                                     placeholder='Password'/>
                                 <input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     type='password' 
                                     value={this.state.registerPasswordConfirm} 
                                     onChange={(event) => {this.setState({registerPasswordConfirm: event.target.value})}}
