@@ -1,5 +1,4 @@
 import React from "react";
-import './QuoteHistory.css';
 import axios from "axios";
 
 const QuoteHHistory = () => {
