@@ -98,6 +98,8 @@ input[type=password] {
   top: 20px;
   -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
           animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
+  -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.7);
 }
 
 .NavBar ul {
@@ -177,6 +179,9 @@ input[type=password] {
   gap: 20px;
   padding: 20px 20px;
   text-align: center;
+  border-radius: 3%;
+  -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.4);
 }
 
 .Loginpage .login-wrapper h1 {
@@ -189,14 +194,45 @@ input[type=password] {
 
 .Loginpage .login-wrapper .form-wrapper {
   padding: 0px 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.Loginpage .login-wrapper .form-wrapper form {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'x x' 'y y' 'z z' 'but but';
+  gap: 10px;
+}
+
+.Loginpage .login-wrapper .form-wrapper form input[type=text] {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: x;
+}
+
+.Loginpage .login-wrapper .form-wrapper form input[type=password] {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
-  grid-area: input;
+  -ms-grid-column-span: 2;
+  grid-area: y;
+}
+
+.Loginpage .login-wrapper .form-wrapper form input[type=password]:nth-child(3) {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: z;
+}
+
+.Loginpage .login-wrapper .form-wrapper form #3, .Loginpage .login-wrapper .form-wrapper form #4 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: but;
 }
 
 .Loginpage .login-wrapper .form-wrapper button[type=submit] {
-  float: left;
   margin-top: 20px;
   font-size: 1.1rem;
   padding: 8px 12px;
@@ -214,8 +250,7 @@ input[type=password] {
           filter: brightness(70%);
 }
 
-.Loginpage .login-wrapper button {
-  float: right;
+.Loginpage .login-wrapper .form-wrapper button {
   margin-top: 20px;
   font-size: 1.1rem;
   padding: 8px 12px;
@@ -233,15 +268,16 @@ input[type=password] {
 }
 
 .Quotehistory table {
-  margin: 50px 0px;
+  font-size: 0.6rem;
+  letter-spacing: 0.05rem;
+  margin: 50px 30px;
   width: 100%;
-  padding: 20px;
   border: 3px solid #ffffff;
   border-collapse: collapse;
 }
 
 .Quotehistory table th {
-  background-color: #819595;
+  background-color: #363946;
   border: 3px solid #ffffff;
 }
 /*# sourceMappingURL=index.css.map */

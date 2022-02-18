@@ -75,6 +75,7 @@ input[type=password] {
     z-index: 10;
     top: 20px;
     animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideDown;
+    box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.7);
     ul {
         display: grid;
         grid-template-columns: 20% 20% 20% 20% 20%;
@@ -139,6 +140,8 @@ input[type=password] {
         gap: 20px;
         padding: 20px 20px;
         text-align: center;
+        border-radius: 3%;
+        box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.4);
         h1 {
             margin-top: 12px;
             font-weight: 100;
@@ -146,10 +149,29 @@ input[type=password] {
         }
         .form-wrapper {
             padding: 0px 20px;
-            margin-bottom: 10px;
-            grid-area: input;
+            margin-bottom: 20px;
+            form {
+                display: grid;
+                grid-template-areas: 
+                    'x x'
+                    'y y'
+                    'z z'
+                    'but but';
+                gap: 10px;
+                input[type=text] {
+                    grid-area: x;
+                }
+                input[type=password] {
+                    grid-area: y;
+                }
+                input[type=password]:nth-child(3) {
+                    grid-area: z;
+                }
+                #3, #4 {
+                    grid-area: but;
+                }
+            }
             button[type=submit] {
-                float: left;
                 margin-top: 20px;
                 font-size: 1.1rem;
                 padding: 8px 12px;
@@ -163,15 +185,14 @@ input[type=password] {
             button[type=submit]:hover {
                 filter: brightness(70%);
             }
-        }
-        button {
-            float: right;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            padding: 8px 12px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
+            button {
+                margin-top: 20px;
+                font-size: 1.1rem;
+                padding: 8px 12px;
+                cursor: pointer;
+                border: none;
+                border-radius: 4px;
+            }
         }
     }
 }
@@ -183,13 +204,14 @@ input[type=password] {
     width: 100%;
     height: auto;
     table {
-        margin: 50px 0px;
+        font-size: 0.6rem;
+        letter-spacing: 0.05rem;
+        margin: 50px 30px;
         width: 100%;
-        padding: 20px;
         border: 3px solid $primary-color;
         border-collapse: collapse;
         th {
-            background-color: $highlight-dark;
+            background-color: $accent-dark;
             border: 3px solid $primary-color;
         }
     }

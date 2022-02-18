@@ -41,9 +41,9 @@ class Login extends Component {
                                     value={this.state.loginPassword} 
                                     onChange={(event) => {this.setState({loginPassword: event.target.value})}}
                                     placeholder='Password'/>
-                                <button type='submit'>Sign In</button>
+                                <button type='submit' id="3">Sign In</button>
+                                <button id="4" onClick={() => {this.setState({registerForm: true})}}>Create a new account</button>
                             </form>
-                            <button onClick={() => {this.setState({registerForm: true})}}>Create a new account</button>
                         </div>
                     }
                     {this.state.registerForm &&
@@ -81,12 +81,11 @@ class Login extends Component {
                                     value={this.state.registerPasswordConfirm} 
                                     onChange={(event) => {this.setState({registerPasswordConfirm: event.target.value})}}
                                     placeholder='Confirm password'/>
-                                <button type='submit'>Create account</button>
+                                <button type='submit' id="3">Create account</button>
+                                <button id="4"  onClick={() => {this.setState({registerForm: false})}}>Already have an account?</button>
                             </form>
-                            <button onClick={() => {this.setState({registerForm: false})}}>Already have an account?</button>
                         </div>
                     }
-                    
                 </div>
             </div>
         )
