@@ -28,7 +28,7 @@ const QuoteHistory = () => {
     }
 
     return (
-        <>
+        <div className="Quotehistory">
             <h1 id='title'>Quote History</h1>
             <table id='customer'>
                 <thead>
@@ -38,7 +38,7 @@ const QuoteHistory = () => {
                     {renderBody()}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

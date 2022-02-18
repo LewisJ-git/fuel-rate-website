@@ -15,11 +15,12 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Login</h3>
-                <div>
+            <div className="Loginpage">
+                
+                <div className="login-wrapper">
+                    {this.state.registerForm ? <h1>Sign up</h1> : <h1>Log in</h1>}
                     {!this.state.registerForm &&
-                        <div>
+                        <div className="form-wrapper">
                             <form onSubmit={() => {
                                     //since this is only front-end no fetch needed
                                     //reset state for now
@@ -46,7 +47,7 @@ class Login extends Component {
                         </div>
                     }
                     {this.state.registerForm &&
-                        <div>
+                        <div className="form-wrapper">
                             <form onSubmit={() => {
                                     if (this.state.registerPassword != this.state.registerPasswordConfirm) {
                                         alert('Password confirmation doesn\'t match with the password entered above')
@@ -62,7 +63,6 @@ class Login extends Component {
                                         })
                                     }
                                 }}>
-                                <label>Create username: </label>
                                 <input 
                                     autoComplete='off' 
                                     type='text' 
@@ -83,6 +83,7 @@ class Login extends Component {
                                     placeholder='Confirm password'/>
                                 <button type='submit'>Create account</button>
                             </form>
+                            <button onClick={() => {this.setState({registerForm: false})}}>Already have an account?</button>
                         </div>
                     }
                     
