@@ -14,26 +14,23 @@ function Quote(){
     today =  yyyy+'-'+ mm +'-' +dd;
     
     return(
-    <div className='quote'>
+    <div className='Fuelquote'>
         <h1>Fuel Quote Form</h1>
         <form>
-            <label>
-                Gallon Requested
-                <input type = "number" placeholder="Enter number of gallons" />
-            </label>
-            <label>
-            Delivery Address
+            <label className="form-label-quote">Gallon Requested</label>
+            <input type = "number" placeholder="Enter number of gallons" />
+
+            <label className="form-label-quote">Delivery Address</label>
             <h3>{user_address}</h3>
-            </label>
-            <label>
-            Delivery Date
+
+            <label className="form-label-quote">Delivery Date</label>
             <input type="date" value={today}></input>
+
+            <label id="pricelabel1">
+                Suggested Price<h3>{suggest_price}</h3>
             </label>
-            <label>
-                Suggested Price
-                <h3>{suggest_price}</h3>
-            </label>
-            <label>
+
+            <label id="pricelabel2">
                 Total Price
                 <h3>{total_price}</h3>
             </label>
