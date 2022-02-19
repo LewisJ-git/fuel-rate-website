@@ -49,7 +49,7 @@ class Login extends Component {
                     {this.state.registerForm &&
                         <div className="form-wrapper">
                             <form onSubmit={() => {
-                                    if (this.state.registerPassword != this.state.registerPasswordConfirm) {
+                                    if (this.state.registerPassword !== this.state.registerPasswordConfirm) {
                                         alert('Password confirmation doesn\'t match with the password entered above')
                                     }
                                     else {
