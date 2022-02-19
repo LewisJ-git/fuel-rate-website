@@ -259,8 +259,8 @@ select {
         display: grid;
         grid-template-areas: 
             'label1 input1'
-            'label2 h3'
-            'label3 input2'
+            'label2 input2'
+            'label3 input3'
             '. .'
             'label4 label5';
         align-items: center;
@@ -273,15 +273,16 @@ select {
             font-weight: 500;
             font-size: 1.3rem;
         }
-        h3 {
-            grid-area: h3;
-        }
         input[type=number] {
             grid-area: input1;
             height: 100%;
         }
         input[type=date] {
             grid-area: input2;
+            height: 100%;
+        }
+        input[type=text] {
+            grid-area: input3;
             height: 100%;
         }
         .form-label-quote:nth-child(1) {

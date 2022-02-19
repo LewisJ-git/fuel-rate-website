@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 function Quote(){
     //user address
-    const user_address = "17110 Main Str, Houston, Texas , 77084"
+    function handleChange(event) {
+        console.log(event.target.value);
+    }
     //get current date
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -15,16 +17,16 @@ function Quote(){
     
     return(
     <div className='Fuelquote'>
-        <h1>Fuel Quote Form</h1>
+        <h1>Fuel Quote Form</h1>    
         <form>
             <label className="form-label-quote">Gallon Requested</label>
-            <input type = "number" placeholder="Enter number of gallons" />
+            <input type = "number" onChange={handleChange} placeholder="Enter number of gallons" ></input>
+            
+            <label className="form-label-quote">Delivery Date</label>
+            <input type="date" onChange={handleChange} value={today}></input>
 
             <label className="form-label-quote">Delivery Address</label>
-            <h3>{user_address}</h3>
-
-            <label className="form-label-quote">Delivery Date</label>
-            <input type="date" value={today}></input>
+            <input type="text" onChange={handleChange} placeholder="Enter the delivery address" ></input>
 
             <label id="pricelabel1">
                 Suggested Price<h3>{suggest_price}</h3>
