@@ -32,7 +32,8 @@ a, a:link {
 input[type=text],
 input[type=password],
 input[type=number],
-input[type=date] {
+input[type=date],
+select {
   width: auto;
   padding: 9px 10px;
   font-size: 1.2rem;
@@ -92,18 +93,18 @@ input[type=date] {
   }
 }
 
-@-webkit-keyframes slideLeft {
+@-webkit-keyframes slideLeftCustom {
   0% {
-    -webkit-transform: translateX(100px);
-            transform: translateX(100px);
+    -webkit-transform: translateX(calc(-50% + 100px));
+            transform: translateX(calc(-50% + 100px));
     opacity: 0%;
   }
 }
 
-@keyframes slideLeft {
+@keyframes slideLeftCustom {
   0% {
-    -webkit-transform: translateX(100px);
-            transform: translateX(100px);
+    -webkit-transform: translateX(calc(-50% + 100px));
+            transform: translateX(calc(-50% + 100px));
     opacity: 0%;
   }
 }
@@ -207,7 +208,6 @@ input[type=date] {
   font-weight: 100;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
   grid-area: header;
 }
 
@@ -247,7 +247,7 @@ input[type=date] {
 }
 
 .Loginpage .login-wrapper .form-wrapper form #3, .Loginpage .login-wrapper .form-wrapper form #4 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 7;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: but;
@@ -328,7 +328,6 @@ input[type=date] {
   padding: 20px 10px;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
   grid-area: header;
   text-align: center;
 }
@@ -355,6 +354,7 @@ input[type=date] {
 
 .Fuelquote form label {
   font-weight: 500;
+  font-size: 1.3rem;
 }
 
 .Fuelquote form h3 {
@@ -371,7 +371,7 @@ input[type=date] {
 }
 
 .Fuelquote form input[type=date] {
-  -ms-grid-row: 3;
+  -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: input2;
   height: 100%;
@@ -396,7 +396,7 @@ input[type=date] {
 }
 
 .Fuelquote form #pricelabel1 {
-  -ms-grid-row: 5;
+  -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: label4;
   background-color: #363946;
@@ -404,9 +404,79 @@ input[type=date] {
 
 .Fuelquote form #pricelabel2 {
   -ms-grid-row: 5;
-  -ms-grid-column: 2;
+  -ms-grid-column: 1;
   grid-area: label5;
   text-align: right;
   background-color: #696773;
+}
+
+.Clientpage {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(129, 149, 149, 0.8)), to(rgba(177, 182, 166, 0.8)));
+  background: linear-gradient(90deg, rgba(129, 149, 149, 0.8) 0%, rgba(177, 182, 166, 0.8) 100%);
+  width: 100%;
+  height: 100vh;
+}
+
+.Clientpage .client-wrapper {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideLeftCustom;
+          animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideLeftCustom;
+  height: auto;
+  width: auto;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'header' 'input';
+  gap: 20px;
+  padding: 20px 20px;
+  background-color: rgba(54, 57, 70, 0.6);
+  border-radius: 1%;
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.4);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  justify-items: start;
+}
+
+.Clientpage .client-wrapper h1 {
+  width: 100%;
+  padding: 20px 10px;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+  font-weight: 100;
+  text-align: center;
+}
+
+.Clientpage .client-wrapper form {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: input;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 'label1 input1' 'label2 input2' 'label3 input3' 'label4 input4' 'label5 label6' 'input5 input6' 'but but';
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+}
+
+.Clientpage .client-wrapper form label {
+  font-size: 1.3rem;
+}
+
+.Clientpage .client-wrapper form button[type=submit] {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  background-color: #819595;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: brightness;
+  transition: brightness;
 }
 /*# sourceMappingURL=index.css.map */
