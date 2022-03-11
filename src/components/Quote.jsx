@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 function Quote(){
-    const url = ''
+    const url = 'http://localhost:3001/quote'
     const [data,setData]= useState({
     gallon:"",
     date:""
@@ -51,7 +51,7 @@ function Quote(){
                 Total Price
                 <h3>{total_price}</h3>
             </label>
-            
+            <button style={{gridArea: "but"}} type="submit">Submit</button>
         </form>
     </div>
 
