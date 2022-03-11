@@ -6,7 +6,7 @@ function Client(){
     const optionList = Options.stateOptions.map((opt, key) => (
         <option key={key} values={`${opt.short}`}>{opt.full}</option>
     ));
-    const url = ''
+    const url = 'http://localhost:3001/profile'
     const [data,setData] = useState({
         fullname :"",
         address1:"",
