@@ -1,9 +1,17 @@
 const express = require("express")
 const app = express()
 const cors = require('cors');
+
 app.use(express.json());
 app.use(cors());
-app.post('/profile',(req,res)=>{
+
+app.use('/api/login', (req, res) => {
+    res.send({
+        token: 'test123'
+    });
+});
+
+app.post('/api/profile',(req,res)=>{
     const fullname = req.body.fullname;
     const address1 =  req.body.address1;
     const address2 = req.body.address2;
@@ -17,13 +25,13 @@ app.post('/profile',(req,res)=>{
     console.log(state)
 });
 
-app.post('/quote',(req,res)=>{
+app.post('/api/quote',(req,res)=>{
     const gallon = req.body.gallon;
     const deliverDate = req.body.date;
     console.log(gallon)
     console.log(deliverDate)
 });
 
-app.listen(3001,()=>{
-    console.log("Running on server 3001");
+app.listen(5000,()=>{
+    console.log("Running on server 5000");
 });
