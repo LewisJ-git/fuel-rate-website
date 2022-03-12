@@ -34,14 +34,14 @@ function Quote(){
     <div className='Fuelquote'>
         <h1>Fuel Quote Form</h1>    
         <form onSubmit={(e)=> submit(e)}>
-            <label className="form-label-quote">Gallon Requested</label>
-            <input type = "number" onChange={(e)=>handle(e)} id="gallon" value={data.gallon} placeholder="Enter number of gallons" ></input>
+            <label style={{gridArea: "label1"}}>Gallon Requested</label>
+            <input style={{gridArea: "input1"}} type = "number" onChange={(e)=>handle(e)} id="gallon" value={data.gallon} placeholder="Enter number of gallons" ></input>
             
-            <label className="form-label-quote">Delivery Date</label>
-            <input type="date" onChange={(e)=>handle(e)} id="date" value={data.date}></input>
+            <label style={{gridArea: "label2"}}>Delivery Date</label>
+            <input style={{gridArea: "input2"}} type="date" onChange={(e)=>handle(e)} id="date" value={data.date}></input>
 
-            <label className="form-label-quote">Delivery Address</label>
-            <input type="text"  placeholder="Enter the delivery address" ></input>
+            <label style={{gridArea: "label3"}}>Delivery Address</label>
+            <input style={{gridArea: "input3"}} type="text"  placeholder="Enter the delivery address" ></input>
 
             <label id="pricelabel1">
                 Suggested Price<h3>{suggest_price}</h3>

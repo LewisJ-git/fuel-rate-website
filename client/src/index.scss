@@ -57,6 +57,13 @@ select {
     }
 }
 
+@keyframes slideDownCustom {
+    0% {
+        transform: translate(-50%, calc(-50% - 100px));
+        opacity: 0%;
+    }
+}
+
 @keyframes slideUpCustom {
     0% {
         transform: translate(-50%, calc(-50% + 100px));
@@ -210,7 +217,7 @@ select {
 
 .Quotehistory {
     position: absolute;
-    top: 120px;
+    top: 20%;
     text-align: center;
     width: 100%;
     height: auto;
@@ -235,10 +242,11 @@ select {
 }
 
 .Fuelquote {
-    //margin: 120px 20px 30px 20px;
     position: absolute;
-    top: 120px;
-    animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideDown;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideDownCustom;
     width: 100%;
     height: auto;
     display: grid;
@@ -262,7 +270,8 @@ select {
             'label2 input2'
             'label3 input3'
             '. .'
-            'label4 label5';
+            'label4 label5'
+            'but but';
         align-items: center;
         grid-auto-rows: 1fr;
         gap: 20px;
@@ -273,27 +282,6 @@ select {
             font-weight: 500;
             font-size: 1.3rem;
         }
-        input[type=number] {
-            grid-area: input1;
-            height: 100%;
-        }
-        input[type=date] {
-            grid-area: input2;
-            height: 100%;
-        }
-        input[type=text] {
-            grid-area: input3;
-            height: 100%;
-        }
-        .form-label-quote:nth-child(1) {
-            grid-area: label1;
-        }
-        .form-label-quote:nth-child(2) {
-            grid-area: label2;
-        }
-        .form-label-quote:nth-child(3) {
-            grid-area: label3;
-        }
         #pricelabel1 {
             grid-area: label4;
             background-color: $accent-dark;
@@ -302,6 +290,17 @@ select {
             grid-area: label5;
             text-align: right;
             background-color: $accent-light;
+        }
+        button[type=submit] {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            background-color: $highlight-dark;
+            color: $primary-color;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: brightness;
         }
     }
 }

@@ -61,6 +61,22 @@ select {
   }
 }
 
+@-webkit-keyframes slideDownCustom {
+  0% {
+    -webkit-transform: translate(-50%, calc(-50% - 100px));
+            transform: translate(-50%, calc(-50% - 100px));
+    opacity: 0%;
+  }
+}
+
+@keyframes slideDownCustom {
+  0% {
+    -webkit-transform: translate(-50%, calc(-50% - 100px));
+            transform: translate(-50%, calc(-50% - 100px));
+    opacity: 0%;
+  }
+}
+
 @-webkit-keyframes slideUpCustom {
   0% {
     -webkit-transform: translate(-50%, calc(-50% + 100px));
@@ -282,7 +298,7 @@ select {
 
 .Quotehistory {
   position: absolute;
-  top: 120px;
+  top: 20%;
   text-align: center;
   width: 100%;
   height: auto;
@@ -312,9 +328,12 @@ select {
 
 .Fuelquote {
   position: absolute;
-  top: 120px;
-  -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
-          animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDownCustom;
+          animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDownCustom;
   width: 100%;
   height: auto;
   display: -ms-grid;
@@ -340,7 +359,7 @@ select {
   margin-top: 50px;
   display: -ms-grid;
   display: grid;
-      grid-template-areas: 'label1 input1' 'label2 input2' 'label3 input3' '. .' 'label4 label5';
+      grid-template-areas: 'label1 input1' 'label2 input2' 'label3 input3' '. .' 'label4 label5' 'but but';
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -357,45 +376,6 @@ select {
   font-size: 1.3rem;
 }
 
-.Fuelquote form input[type=number] {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: input1;
-  height: 100%;
-}
-
-.Fuelquote form input[type=date] {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: input2;
-  height: 100%;
-}
-
-.Fuelquote form input[type=text] {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  grid-area: input3;
-  height: 100%;
-}
-
-.Fuelquote form .form-label-quote:nth-child(1) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: label1;
-}
-
-.Fuelquote form .form-label-quote:nth-child(2) {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
-  grid-area: label2;
-}
-
-.Fuelquote form .form-label-quote:nth-child(3) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-  grid-area: label3;
-}
-
 .Fuelquote form #pricelabel1 {
   -ms-grid-row: 4;
   -ms-grid-column: 1;
@@ -409,6 +389,19 @@ select {
   grid-area: label5;
   text-align: right;
   background-color: #696773;
+}
+
+.Fuelquote form button[type=submit] {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  background-color: #819595;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: brightness;
+  transition: brightness;
 }
 
 .Clientpage {
