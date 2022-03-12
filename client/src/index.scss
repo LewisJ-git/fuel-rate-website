@@ -59,7 +59,7 @@ select {
 
 @keyframes slideDownCustom {
     0% {
-        transform: translate(-50%, calc(-50% - 100px));
+        transform: translate(-50%, -100px);
         opacity: 0%;
     }
 }
@@ -243,9 +243,9 @@ select {
 
 .Fuelquote {
     position: absolute;
-    top: 50%;
+    top: 120px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideDownCustom;
     width: 100%;
     height: auto;

@@ -63,16 +63,16 @@ select {
 
 @-webkit-keyframes slideDownCustom {
   0% {
-    -webkit-transform: translate(-50%, calc(-50% - 100px));
-            transform: translate(-50%, calc(-50% - 100px));
+    -webkit-transform: translate(-50%, -100px);
+            transform: translate(-50%, -100px);
     opacity: 0%;
   }
 }
 
 @keyframes slideDownCustom {
   0% {
-    -webkit-transform: translate(-50%, calc(-50% - 100px));
-            transform: translate(-50%, calc(-50% - 100px));
+    -webkit-transform: translate(-50%, -100px);
+            transform: translate(-50%, -100px);
     opacity: 0%;
   }
 }
@@ -328,10 +328,10 @@ select {
 
 .Fuelquote {
   position: absolute;
-  top: 50%;
+  top: 120px;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
   -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDownCustom;
           animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDownCustom;
   width: 100%;
