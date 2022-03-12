@@ -340,7 +340,7 @@ select {
   margin-top: 50px;
   display: -ms-grid;
   display: grid;
-      grid-template-areas: 'label1 input1' 'label2 h3' 'label3 input2' '. .' 'label4 label5';
+      grid-template-areas: 'label1 input1' 'label2 input2' 'label3 input3' '. .' 'label4 label5';
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -357,12 +357,6 @@ select {
   font-size: 1.3rem;
 }
 
-.Fuelquote form h3 {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: h3;
-}
-
 .Fuelquote form input[type=number] {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
@@ -374,6 +368,13 @@ select {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: input2;
+  height: 100%;
+}
+
+.Fuelquote form input[type=text] {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: input3;
   height: 100%;
 }
 
