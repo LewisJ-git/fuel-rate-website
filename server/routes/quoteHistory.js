@@ -18,23 +18,31 @@ const router = express.Router();
         //return res.send(response);
   //});
 
-router.get("/api/quote", (req, res) => {
+router.get("/quote", (req, res) => {
     const abc = [
         {
             id: 1,
             gallons_requested: "500",
             delivery_address: "4800 Calhoun Rd, Houston, TX 77004",
             delivery_date: "03/01/2022",
-            suggested_price: "$3.00",
-            total_due: "$1500.00",
+            suggested_price: "3.00",
+            total_due: "1500.00",
         },
         {
             id: 2,
             gallons_requested: "1000",
             delivery_address: "4800 Calhoun Rd, Houston, TX 77004",
             delivery_date: "03/05/2022",
-            suggested_price: "$3.00",
-            total_due: "$3000.00",
+            suggested_price: "3.00",
+            total_due: "3000.00",
+        },
+        {
+            id: 3,
+            gallons_requested: "3000",
+            delivery_address: "4800 Calhoun Rd, Houston, TX 77004",
+            delivery_date: "03/08/2022",
+            suggested_price: "3.00",
+            total_due: "9000.00",
         }
     ];
     res.json(abc);

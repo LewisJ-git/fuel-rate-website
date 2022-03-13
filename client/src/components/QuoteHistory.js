@@ -46,7 +46,7 @@ const QuoteHistory = ({ match }) => {
                     <>
                         {quotes.length > 0 ? (
                             <>
-                                <Typography>{`Quote History`}</Typography>
+                                <Typography align="center">{`Quote History`}</Typography>
                                 <TableContainer
                                     component={Paper}
                                     style={{ width: 800, paddingTop: "10px" }}>
