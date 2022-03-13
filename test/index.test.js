@@ -1,5 +1,6 @@
 import { expect, server, BASE_URL } from './setup';
-
+import supertest from "supertest";
+import app from "server.js";
 describe('Index page test', () => {
   it('gets base url', done => {
     server
