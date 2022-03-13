@@ -2,7 +2,18 @@ import { Component } from "react";
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
-    return fetch('/api/login', {
+    return fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
+}
+
+async function registerUser(credentials) {
+    return fetch('http://localhost:5000/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -27,15 +38,34 @@ class Login extends Component {
 
     handleLoginSubmit = async e => {
         e.preventDefault();
-        this.setState({
-            loginUsername: '',
-            loginPassword: ''
-        })
         const token = await loginUser({
             username: this.state.loginUsername,
             password: this.state.loginPassword
         });
         this.props.setToken(token);
+        this.setState({
+            loginUsername: '',
+            loginPassword: ''
+        })
+    }
+
+    handleRegisterSubmit = async e => {
+        e.preventDefault();
+        if (this.state.registerPassword !== this.state.registerPasswordConfirm) {
+            alert('Password confirmation doesn\'t match with the password entered above')
+        }
+        else {
+            const token = await registerUser({
+                username: this.state.registerUsername,
+                password: this.state.registerPassword
+            });
+            this.props.setToken(token);
+            this.setState({
+                registerUsername: '',
+                registerPassword: '',
+                registerPasswordConfirm: ''
+            })
+        }
     }
 
     render() {
@@ -65,21 +95,7 @@ class Login extends Component {
                     }
                     {this.state.registerForm &&
                         <div className="form-wrapper">
-                            <form onSubmit={() => {
-                                    if (this.state.registerPassword !== this.state.registerPasswordConfirm) {
-                                        alert('Password confirmation doesn\'t match with the password entered above')
-                                    }
-                                    else {
-                                        //create the account with the info filled above
-                                        //since this is only front-end no fetch needed
-                                        //reset state for now
-                                        this.setState({
-                                            registerUsername: '',
-                                            registerPassword: '',
-                                            registerPasswordConfirm: ''
-                                        })
-                                    }
-                                }}>
+                            <form onSubmit={this.handleRegisterSubmit}>
                                 <input 
                                     autoComplete='off' 
                                     type='text' 

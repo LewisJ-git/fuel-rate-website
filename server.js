@@ -1,14 +1,30 @@
 const express = require("express")
 const app = express()
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.use(cors());
+
+const users = [];
 
 app.use('/api/login', (req, res) => {
     res.send({
         token: 'test123'
     });
+});
+
+app.use('/api/register', async (req, res) => {
+    try {
+        const hashedPass = await bcrypt.hash(req.body.password, 10)
+        users.push({
+            username: req.body.username,
+            password: hashedPass
+        })
+    } catch (err) {
+        console.log(err)
+    }
+    console.log(users)
 });
 
 app.post('/api/profile',(req,res)=>{
