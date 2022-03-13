@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/history", (req, res) => {
+router.get("/quote", (req, res) => {
   
   var userID = "Nhi Hoang";
   var gallons_requested = "500";
