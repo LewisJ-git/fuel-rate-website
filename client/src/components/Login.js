@@ -1,4 +1,16 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
+
+async function loginUser(credentials) {
+    return fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
+}
 
 class Login extends Component {
     constructor(props) {
@@ -13,22 +25,27 @@ class Login extends Component {
         }
     }
 
+    handleLoginSubmit = async e => {
+        e.preventDefault();
+        this.setState({
+            loginUsername: '',
+            loginPassword: ''
+        })
+        const token = await loginUser({
+            username: this.state.loginUsername,
+            password: this.state.loginPassword
+        });
+        this.props.setToken(token);
+    }
+
     render() {
         return (
             <div className="Loginpage">
-                
                 <div className="login-wrapper">
                     {this.state.registerForm ? <h1>Sign up</h1> : <h1>Log in</h1>}
                     {!this.state.registerForm &&
                         <div className="form-wrapper">
-                            <form onSubmit={() => {
-                                    //since this is only front-end no fetch needed
-                                    //reset state for now
-                                    this.setState({
-                                        loginUsername: '',
-                                        loginPassword: ''
-                                    })
-                                }}>
+                            <form onSubmit={this.handleLoginSubmit}>
                                 <input 
                                     autoComplete='off' 
                                     type='text' 
@@ -92,5 +109,8 @@ class Login extends Component {
     }
 }
 
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+}
 
 export default Login
