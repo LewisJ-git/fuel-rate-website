@@ -11,6 +11,15 @@ app.use(cors({
 
 const users = [];
 
+function checkExistingUsers(inputUsername) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username == inputUsername) {
+            return true;
+        }
+    }
+    return false;
+}
+
 app.use('/api/login', (req, res) => {
     res.send({
         token: 'test123'
@@ -20,14 +29,19 @@ app.use('/api/login', (req, res) => {
 app.use('/api/register', async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(req.body.password, 10)
-        users.push({
-            username: req.body.username,
-            password: hashedPass
-        })
+        if (checkExistingUsers(req.body.username)) {
+            res.send("User already exist")
+        }
+        else {
+            users.push({
+                username: req.body.username,
+                password: hashedPass
+            })
+            res.send("User created")
+        }
     } catch (err) {
         console.log(err)
     }
-    console.log(users)
 });
 
 app.post('/api/profile',(req,res)=>{

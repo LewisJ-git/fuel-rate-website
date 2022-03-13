@@ -1,19 +1,9 @@
 import { Component } from "react";
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 async function loginUser(credentials) {
     return fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-    .then(data => data.json())
-}
-
-async function registerUser(credentials) {
-    return fetch('http://localhost:5000/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -50,22 +40,29 @@ class Login extends Component {
     }
 
     handleRegisterSubmit = async e => {
-        e.preventDefault();
         if (this.state.registerPassword !== this.state.registerPasswordConfirm) {
             alert('Password confirmation doesn\'t match with the password entered above')
         }
         else {
-            const token = await registerUser({
-                username: this.state.registerUsername,
-                password: this.state.registerPassword
-            });
-            this.props.setToken(token);
-            this.setState({
-                registerUsername: '',
-                registerPassword: '',
-                registerPasswordConfirm: ''
-            })
+            axios({
+                method: "POST",
+                data: {
+                    username: this.state.registerUsername,
+                    password: this.state.registerPassword
+                },
+                withCredentials: true,
+                url: "http://localhost:5000/api/register"
+            }).then((res) => alert(res.data));
+            this.resetRegisterState();
         }
+    }
+
+    resetRegisterState() {
+        this.setState({
+            registerUsername: '',
+            registerPassword: '',
+            registerPasswordConfirm: ''
+        })
     }
 
     render() {
