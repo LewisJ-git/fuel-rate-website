@@ -30,7 +30,7 @@ describe("Testing the post request for the Fuel Quote Form", () => {
 describe("Testing the post request for the User Reqistration Form", () => {
   test("This should get a reponse of 200", async () => {
     const result = await supertest(app)
-      .post("/profile")
+      .post("/api/profile")
       .send({
         username: "Test",
         password: "Test",
