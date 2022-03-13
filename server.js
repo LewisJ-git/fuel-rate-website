@@ -58,6 +58,7 @@ app.post('/api/profile',(req,res)=>{
     console.log(address2)
     console.log(city)
     console.log(state)
+    res.sendStatus(200)
 });
 
 app.post('/api/quote',(req,res)=>{
@@ -65,6 +66,7 @@ app.post('/api/quote',(req,res)=>{
     const deliverDate = req.body.date;
     console.log(gallon)
     console.log(deliverDate)
+    res.sendStatus(200)
 });
 
 app.use("/quotehistory", quoteHistoryRouter);
