@@ -14,3 +14,27 @@ describe('Index page test', () => {
       });
   });
 });
+
+
+/*Post Test */
+describe("Testing the post request for the Fuel Quote Form", () => {
+  test("This should get a reponse of 200", async () => {
+    const result = await supertest(app).post("/api/quote").send({
+      userId: "Test",
+      password: "Test",
+    });
+    expect(result.statusCode).toBe(200);
+  });
+});
+
+describe("Testing the post request for the User Reqistration Form", () => {
+  test("This should get a reponse of 200", async () => {
+    const result = await supertest(app)
+      .post("/profile")
+      .send({
+        username: "Test",
+        password: "Test",
+      });
+    expect(result.statusCode).toBe(200);
+  });
+});
