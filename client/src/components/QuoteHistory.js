@@ -16,14 +16,15 @@ import axios from "axios";
 
 const QuoteHistory = ({ match }) => {
 
-    var id = "Nhi Hoang";
+    //let user = "abc";
+    //let id = user.userID;
 
     const [quotes, setQuotes] = useState([]);
 
     const getQuotes = () => {
         axios
             .get(`/quoteHistory/quote`, {
-                params: { userID: id },
+                //params: { id: abc },
             })
             .then((res) => {
                 console.log(res);
@@ -36,7 +37,7 @@ const QuoteHistory = ({ match }) => {
 
     useEffect(() => {
         getQuotes();
-    }, []);
+    });
 
     console.log(quotes); 
 
@@ -61,18 +62,12 @@ const QuoteHistory = ({ match }) => {
                                         </TableHead>
                                         <TableBody>
                                             {quotes.map((quote) => (
-                                                <TableRow key={quote.transaction_id}>
-                                                    <TableCell component="th" scope="row">
-                                                        {quote.customer_name}
-                                                    </TableCell>
-                                                    <TableCell align="right">
-                                                    {quote.quote_time.toString().split("T")[0]}
-                                                    </TableCell>
-                                                    
-                                                    <TableCell align="right">{quote.quantity_quoted}</TableCell>
-                                                    <TableCell align="right">
-                                                        {"$" + quote.total_quote_cost}
-                                                    </TableCell>                                               
+                                                <TableRow key={quote.id}>
+                                                    <TableCell component="th" scope="row">{quote.gallons_requested}</TableCell>
+                                                    <TableCell align="right">{quote.delivery_address}</TableCell>
+                                                    <TableCell align="right">{quote.delivery_date}</TableCell>                                            
+                                                    <TableCell align="right">{"$" + quote.suggested_price}</TableCell>
+                                                    <TableCell align="right">{"$" + quote.total_due}</TableCell>                                               
                                                 </TableRow>
                                             ))}
                                         </TableBody>

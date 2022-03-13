@@ -9,7 +9,7 @@ app.use(cors({
     credentials: true
 }));
 
-var quoteHistoryRouter = require("./routes/quoteHistory");
+var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
 const users = [];
 
