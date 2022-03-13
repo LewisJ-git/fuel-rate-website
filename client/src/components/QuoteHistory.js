@@ -42,30 +42,33 @@ const QuoteHistory = ({ match }) => {
     console.log(quotes); 
 
     return (
-        <div style={{ padding: "10px" }}>            
+        <div style={{ padding: "100px" }}>            
                     <>
                         {quotes.length > 0 ? (
                             <>
-                                <Typography align="center">{`Quote History`}</Typography>
+                                <Typography align="center" style={{fontSize: 30, backgroundColor: '#819595', color: 'white', padding: "10px", fontWeight: "bold" }}>
+                                    {`Quote History`}</Typography>
                                 <TableContainer
                                     component={Paper}
-                                    style={{ width: 800, paddingTop: "10px" }}>
+                                    style={{ width: 1165, paddingTop: "0px" }}>
                                     <Table aria-label="simple table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Gallons Requested</TableCell>
-                                                <TableCell align="right">Delivery Address</TableCell>
-                                                <TableCell align="right">Delivery Date</TableCell>
-                                                <TableCell align="right">Suggested Price / gallon</TableCell>
-                                                <TableCell align="right">Total Due</TableCell>
+                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Quote ID</TableCell>
+                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Gallons Requested</TableCell>
+                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Address</TableCell>
+                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Date</TableCell>
+                                                <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Suggested Price / gallon</TableCell>
+                                                <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Total Due</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {quotes.map((quote) => (
                                                 <TableRow key={quote.id}>
-                                                    <TableCell component="th" scope="row">{quote.gallons_requested}</TableCell>
-                                                    <TableCell align="right">{quote.delivery_address}</TableCell>
-                                                    <TableCell align="right">{quote.delivery_date}</TableCell>                                            
+                                                    <TableCell align = "left" component="th" scope="row">{"#" + quote.id}</TableCell>
+                                                    <TableCell align="left">{quote.gallons_requested}</TableCell>
+                                                    <TableCell align="left">{quote.delivery_address}</TableCell>
+                                                    <TableCell align="left">{quote.delivery_date}</TableCell>                                            
                                                     <TableCell align="right">{"$" + quote.suggested_price}</TableCell>
                                                     <TableCell align="right">{"$" + quote.total_due}</TableCell>                                               
                                                 </TableRow>
