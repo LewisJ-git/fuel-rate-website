@@ -9,6 +9,8 @@ app.use(cors({
     credentials: true
 }));
 
+var quoteHistoryRouter = require("./routes/quoteHistory");
+
 const users = [];
 
 function checkExistingUsers(inputUsername) {
@@ -64,6 +66,8 @@ app.post('/api/quote',(req,res)=>{
     console.log(gallon)
     console.log(deliverDate)
 });
+
+app.use("/quotehistory", quoteHistoryRouter);
 
 app.listen(5000,()=>{
     console.log("Running on server 5000");
