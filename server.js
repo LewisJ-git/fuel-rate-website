@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 const cors = require('cors');
+var multer = require('multer');
+var upload = multer(); 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -14,8 +16,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(upload.array());
 app.use(cookieParser());
-app.use(session({secret: "Your secret key"}));
-
+app.use(
+    session({
+        secret: "secretcode",
+        resave: true,
+        saveUninitialized: true
+    })
+);
 var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
 const users = [];
@@ -29,13 +36,25 @@ function checkExistingUsers(inputUsername) {
     return false;
 }
 
-app.use('/api/login', (req, res) => {
-    res.send({
-        token: 'test123'
-    });
+app.post('/api/login', (req, res) => {
+    console.log(req.body)
+    if (req.body.username == null || req.body.password == null) {
+        res.send("Please enter both username and password");
+    } else {
+        users.filter(function(user){
+            if(user.username === req.body.username && user.password === req.body.password){
+                req.session.user = user;
+                res.redirect('http://localhost:3000');
+                
+            }
+            else {
+                res.send("Invalid credentials!");
+            }
+        });
+    }
 });
 
-app.use('/api/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     try {
         if (checkExistingUsers(req.body.username)) {
             res.send("User already exist")

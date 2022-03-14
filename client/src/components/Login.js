@@ -27,16 +27,16 @@ class Login extends Component {
     }
 
     handleLoginSubmit = async e => {
-        e.preventDefault();
-        const token = await loginUser({
-            username: this.state.loginUsername,
-            password: this.state.loginPassword
-        });
-        this.props.setToken(token);
-        this.setState({
-            loginUsername: '',
-            loginPassword: ''
-        })
+        axios({
+            method: "POST",
+            data: {
+                username: this.state.loginUsername,
+                password: this.state.loginPassword
+            },
+            withCredentials: true,
+            url: "http://localhost:5000/api/login"
+        }).then((res) => alert(res.data));
+        this.resetLoginState();
     }
 
     handleRegisterSubmit = async e => {
@@ -55,6 +55,13 @@ class Login extends Component {
             }).then((res) => alert(res.data));
             this.resetRegisterState();
         }
+    }
+
+    resetLoginState() {
+        this.setState({
+            loginUsername: '',
+            loginPassword: ''
+        })
     }
 
     resetRegisterState() {
