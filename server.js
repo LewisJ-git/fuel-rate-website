@@ -1,13 +1,20 @@
 const express = require("express")
 const app = express()
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 app.use(express.json());
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(upload.array());
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
 
 var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
@@ -30,14 +37,13 @@ app.use('/api/login', (req, res) => {
 
 app.use('/api/register', async (req, res) => {
     try {
-        const hashedPass = await bcrypt.hash(req.body.password, 10)
         if (checkExistingUsers(req.body.username)) {
             res.send("User already exist")
         }
         else {
             users.push({
                 username: req.body.username,
-                password: hashedPass
+                password: req.body.password
             })
             res.send("User created")
         }
