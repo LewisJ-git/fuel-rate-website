@@ -36,6 +36,14 @@ function checkExistingUsers(inputUsername) {
     return false;
 }
 
+function checkSignIn(req){
+    if (req.session.user) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 app.post('/api/login', (req, res) => {
     console.log(req.body)
     if (req.body.username == null || req.body.password == null) {
@@ -44,8 +52,7 @@ app.post('/api/login', (req, res) => {
         users.filter(function(user){
             if(user.username === req.body.username && user.password === req.body.password){
                 req.session.user = user;
-                res.redirect('http://localhost:3000');
-                
+                res.send('/');
             }
             else {
                 res.send("Invalid credentials!");
@@ -70,6 +77,20 @@ app.post('/api/register', async (req, res) => {
         console.log(err)
     }
 });
+
+app.post('/auth', async (req, res) => {
+    try {
+        if (!checkSignIn(req)) {
+            res.send('/login');
+        }
+        else {
+            res.send('authorized');
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+})
 
 app.post('/api/profile',(req,res)=>{
     const fullname = req.body.fullname;

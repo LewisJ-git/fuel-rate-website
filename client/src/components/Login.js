@@ -1,17 +1,6 @@
 import { Component } from "react";
-import PropTypes from 'prop-types';
 import axios from 'axios';
-
-async function loginUser(credentials) {
-    return fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-    .then(data => data.json())
-}
+import { Navigate } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -24,6 +13,17 @@ class Login extends Component {
             registerPassword: '',
             registerPasswordConfirm: ''
         }
+    }
+
+    async loginAuth() {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/auth"
+        }).then((res) => {if (res.data === '/') return <Navigate to='/'/>})
+    }
+
+    componentDidMount = () => {
+        this.loginAuth()
     }
 
     handleLoginSubmit = async e => {
@@ -128,9 +128,4 @@ class Login extends Component {
         )
     }
 }
-
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-}
-
 export default Login

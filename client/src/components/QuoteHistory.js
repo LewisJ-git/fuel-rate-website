@@ -13,11 +13,18 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const QuoteHistory = ({ match }) => {
 
     //let user = "abc";
     //let id = user.userID;
+    useEffect(() => {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/auth"
+        }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
+    }, [])
 
     const [quotes, setQuotes] = useState([]);
 

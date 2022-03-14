@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Options from './options.json';
 import axios from 'axios';
+import { Navigate } from "react-router-dom";
 
 function Client(){
+    useEffect(() => {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/auth"
+        }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
+    }, [])
+
     const optionList = Options.stateOptions.map((opt, key) => (
         <option key={key} values={`${opt.short}`}>{opt.full}</option>
     ));

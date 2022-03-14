@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Navigate } from "react-router-dom";
+
 function Quote(){
     const url = 'http://localhost:3001/quote'
     const [data,setData]= useState({
     gallon:"",
     date:""
     })
+
+    useEffect(() => {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/auth"
+        }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
+    }, [])
     
     function handle(e){
         const newData = {...data}
