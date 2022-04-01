@@ -6,6 +6,7 @@ var upload = multer();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 var session = require('express-session');
+var db = require("./server/database.js");
 
 
 app.use(express.json());
