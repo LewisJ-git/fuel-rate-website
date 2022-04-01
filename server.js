@@ -27,11 +27,7 @@ app.use(
 );
 var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
-const users = [];
-
-function isEmpty(object) {
-    return Object.keys(user).length === 0
-}
+const current_user_id = null;
 
 async function checkExistingUsers(inputUsername) {
     let exists = true;
@@ -53,17 +49,18 @@ async function loginAuthenticator(inputUsername, inputPassword) {
         if (err) throw err
         //console.log(result)
         if (result.length != 0) {
+            current_user_id = result[0].user_id;
             authBool = true;
         }
     })
     return authBool;
 }
 
-function checkSignIn(req){
-    if (req.session.user) {
-        return true;
-    } else {
+function checkSignIn(){
+    if (current_user_id == null) {
         return false;
+    } else {
+        return true;
     }
 }
 
@@ -75,11 +72,24 @@ app.post('/api/login', (req, res) => {
             const x = loginAuthenticator(req.body.username, req.body.password)
             if (x) {
                 res.send("Success")
-                //move to page home
             }
             else {
-                res.send("Invalid credentials!");
+                res.send("Invalid credentials!")
             }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+});
+
+app.post('/api/logout', (req, res) => {
+    try {
+        if (!checkSignIn) {
+            res.send("You are not logged in")
+        }
+        else {
+            current_user_id = null
+            res.send("Success")
         }
     } catch (err) {
         console.log(err)
