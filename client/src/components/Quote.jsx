@@ -16,27 +16,8 @@ function Quote(){
         }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
     }, [])
     
-    const [isInState, setIsInState] = useState(false);
-    const [suggestedPrice, setSuggestedPrice] = useState(0);
-    const [totalAmount, setTotalAmount] = useState(0);
-    const [clientList,setClientList]=useState([]) 
-    useEffect(()=>{
-        axios.get('http://localhost:3001/api/getClient').then((response)=>{
-            setClientList(response.data);
-        });
-    },[]);
-    
-    //determine Fuel Quote Price
-    function determineFuelQuotePrice(gallonAmount){
-        if(clientList[0].state == "TX"){
-            setIsInState(true);
-        }
-        //const margin = (1.5) * ((isInState ? 0.02 : 0.04) - (hasPreviousQuote ? 0.01 : 0.00) + (gallonAmount > 1000 ? 0.02 : 0.03) + 0.10)
-        //const tempSuggestedPrice = (1.5 + margin).toFixed(2);
-        //setSuggestedPrice(tempSuggestedPrice);
-        //setTotalAmount(tempSuggestedPrice * gallonAmount);
-    }   
-        
+    var suggestedPrice = 3;
+    var totalAmount = 180; 
     function handle(e){
         const newData = {...data}
         newData[e.target.id] = e.target.value
