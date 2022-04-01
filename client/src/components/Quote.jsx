@@ -16,6 +16,27 @@ function Quote(){
         }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
     }, [])
     
+    const [isInState, setIsInState] = useState(false);
+    const [suggestedPrice, setSuggestedPrice] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [clientList,setClientList]=useState([]) 
+    useEffect(()=>{
+        Axios.get('http://localhost:3001/api/getClient').then((response)=>{
+            setClientList(response.data);
+        });
+    },[]);
+    
+    //determine Fuel Quote Price
+    function determineFuelQuotePrice(gallonAmount){
+        if(clientList[0].state == "TX"){
+            setIsInState(true);
+        }
+        const margin = (1.5) * ((isInState ? 0.02 : 0.04) - (hasPreviousQuote ? 0.01 : 0.00) + (gallonAmount > 1000 ? 0.02 : 0.03) + 0.10)
+        const tempSuggestedPrice = (1.5 + margin).toFixed(2);
+        setSuggestedPrice(tempSuggestedPrice);
+        setTotalAmount(tempSuggestedPrice * gallonAmount);
+    }   
+        
     function handle(e){
         const newData = {...data}
         newData[e.target.id] = e.target.value
@@ -34,9 +55,7 @@ function Quote(){
         })
     }
     
-    var suggest_price = "$3.00"
-    //total price
-    var total_price = "$250.00"
+
    
     
     return(
@@ -53,12 +72,12 @@ function Quote(){
             <input style={{gridArea: "input3"}} type="text"  placeholder="Enter the delivery address" ></input>
 
             <label id="pricelabel1">
-                Suggested Price<h3>{suggest_price}</h3>
+                Suggested Price<h3>{suggestedPrice}</h3>
             </label>
 
             <label id="pricelabel2">
                 Total Price
-                <h3>{total_price}</h3>
+                <h3>{totalAmount}</h3>
             </label>
             <button style={{gridArea: "but"}} type="submit">Submit</button>
         </form>
