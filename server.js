@@ -6,7 +6,7 @@ var upload = multer();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 var session = require('express-session');
-var databaseRouter = require("./server/routes/database");
+
 
 app.use(express.json());
 app.use(cors({
@@ -100,18 +100,7 @@ app.post('/api/profile',(req,res)=>{
     const city =  req.body.city;
     const state = req.body.state;
     const zipcode = req.body.zipcode;
-    const sqlInsert = "INSERT INTO client_info (clientName, clientAddress1, clientAddress2, clientCity, clientState, clientZipcode) VALUES (?,?,?,?,?,?)";
-    databaseRouter.query(sqlInsert,[fullname,address1,address2,city,state,zipcode],(err,result)=>{
-        console.log(result);
-    });
     res.sendStatus(200)
-});
-
-app.get('/api/getClient',(req,res)=>{
-    const sqlSelect = "SELECT * FROM client_info;"
-    databaseRouter.query(sqlSelect,(err,result)=>{
-        res.send(result);
-    });
 });
 
 app.post('/api/quote',(req,res)=>{
