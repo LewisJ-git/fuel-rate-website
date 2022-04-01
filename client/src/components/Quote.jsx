@@ -21,7 +21,7 @@ function Quote(){
     const [totalAmount, setTotalAmount] = useState(0);
     const [clientList,setClientList]=useState([]) 
     useEffect(()=>{
-        Axios.get('http://localhost:3001/api/getClient').then((response)=>{
+        axios.get('http://localhost:3001/api/getClient').then((response)=>{
             setClientList(response.data);
         });
     },[]);
@@ -31,10 +31,10 @@ function Quote(){
         if(clientList[0].state == "TX"){
             setIsInState(true);
         }
-        const margin = (1.5) * ((isInState ? 0.02 : 0.04) - (hasPreviousQuote ? 0.01 : 0.00) + (gallonAmount > 1000 ? 0.02 : 0.03) + 0.10)
-        const tempSuggestedPrice = (1.5 + margin).toFixed(2);
-        setSuggestedPrice(tempSuggestedPrice);
-        setTotalAmount(tempSuggestedPrice * gallonAmount);
+        //const margin = (1.5) * ((isInState ? 0.02 : 0.04) - (hasPreviousQuote ? 0.01 : 0.00) + (gallonAmount > 1000 ? 0.02 : 0.03) + 0.10)
+        //const tempSuggestedPrice = (1.5 + margin).toFixed(2);
+        //setSuggestedPrice(tempSuggestedPrice);
+        //setTotalAmount(tempSuggestedPrice * gallonAmount);
     }   
         
     function handle(e){
