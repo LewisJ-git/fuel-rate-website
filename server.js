@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 var session = require('express-session');
 var db = require("./server/database.js");
-
+const db_users = 'GasPriceGroupTen.users';
 
 app.use(express.json());
 app.use(cors({
@@ -29,13 +29,34 @@ var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
 const users = [];
 
-function checkExistingUsers(inputUsername) {
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].username == inputUsername) {
-            return true;
+function isEmpty(object) {
+    return Object.keys(user).length === 0
+}
+
+async function checkExistingUsers(inputUsername) {
+    let exists = true;
+    const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${inputUsername}'`
+    db.query(sqlSelect, (err, result) => {
+        if (err) throw err
+        //console.log(result)
+        if (result.length == 0) {
+            exists = false;
         }
-    }
-    return false;
+    })
+    return exists;
+}
+
+async function loginAuthenticator(inputUsername, inputPassword) {
+    let authBool = false;
+    const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${inputUsername}' AND password='${inputPassword}'`
+    db.query(sqlSelect, (err, result) => {
+        if (err) throw err
+        //console.log(result)
+        if (result.length != 0) {
+            authBool = true;
+        }
+    })
+    return authBool;
 }
 
 function checkSignIn(req){
@@ -47,19 +68,21 @@ function checkSignIn(req){
 }
 
 app.post('/api/login', (req, res) => {
-    console.log(req.body)
-    if (req.body.username == null || req.body.password == null) {
-        res.send("Please enter both username and password");
-    } else {
-        users.filter(function(user){
-            if(user.username === req.body.username && user.password === req.body.password){
-                req.session.user = user;
-                res.send('/');
+    try {
+        if (req.body.username == null || req.body.password == null) {
+            res.send("Please enter both username and password");
+        } else {
+            const x = loginAuthenticator(req.body.username, req.body.password)
+            if (x) {
+                res.send("Success")
+                //move to page home
             }
             else {
                 res.send("Invalid credentials!");
             }
-        });
+        }
+    } catch (err) {
+        console.log(err)
     }
 });
 
@@ -69,10 +92,7 @@ app.post('/api/register', async (req, res) => {
             res.send("User already exist")
         }
         else {
-            users.push({
-                username: req.body.username,
-                password: req.body.password
-            })
+            const newUser = await db.query(`INSERT INTO ${db_users} (username, password) VALUES ('${req.body.username}', '${req.body.password}')`)
             res.send("User created")
         }
     } catch (err) {
