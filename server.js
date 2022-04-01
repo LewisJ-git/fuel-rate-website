@@ -27,7 +27,7 @@ app.use(
 );
 var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
-const current_user_id = null;
+var current_user_id;
 
 async function checkExistingUsers(inputUsername) {
     let exists = true;
@@ -42,25 +42,11 @@ async function checkExistingUsers(inputUsername) {
     return exists;
 }
 
-async function loginAuthenticator(inputUsername, inputPassword) {
-    let authBool = false;
-    const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${inputUsername}' AND password='${inputPassword}'`
-    db.query(sqlSelect, (err, result) => {
-        if (err) throw err
-        //console.log(result)
-        if (result.length != 0) {
-            current_user_id = result[0].user_id;
-            authBool = true;
-        }
-    })
-    return authBool;
-}
-
-function checkSignIn(){
-    if (current_user_id == null) {
-        return false;
-    } else {
+function checkSignIn(req){
+    if (req.session.user) {
         return true;
+    } else {
+        return false;
     }
 }
 
@@ -69,13 +55,20 @@ app.post('/api/login', (req, res) => {
         if (req.body.username == null || req.body.password == null) {
             res.send("Please enter both username and password");
         } else {
-            const x = loginAuthenticator(req.body.username, req.body.password)
-            if (x) {
-                res.send("Success")
-            }
-            else {
-                res.send("Invalid credentials!")
-            }
+            const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${req.body.username}' AND password='${req.body.password}'`
+            db.query(sqlSelect, (err, result) => {
+                if (err) throw err
+                //console.log(result)
+                if (result.length != 0) {
+                    req.session.user = {id: result[0].user_id};
+                    //console.log(req.session.user)
+                    authBool = true;
+                    res.send("Success")
+                }
+                else {
+                    res.send("Invalid credentials!")
+                }
+            })
         }
     } catch (err) {
         console.log(err)
@@ -84,12 +77,13 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/logout', (req, res) => {
     try {
-        if (!checkSignIn) {
+        if (!checkSignIn(req)) {
             res.send("You are not logged in")
         }
         else {
-            current_user_id = null
-            res.send("Success")
+            req.session.destroy(function(){
+                res.send("Success")
+            });
         }
     } catch (err) {
         console.log(err)
@@ -112,8 +106,9 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/auth', async (req, res) => {
     try {
+        //console.log(req.session)
         if (!checkSignIn(req)) {
-            res.send('/login');
+            res.send('unauthorized');
         }
         else {
             res.send('authorized');

@@ -11,7 +11,8 @@ class Login extends Component {
             registerForm: false,
             registerUsername: '',
             registerPassword: '',
-            registerPasswordConfirm: ''
+            registerPasswordConfirm: '',
+            loginStatus: false
         }
     }
 
@@ -19,7 +20,25 @@ class Login extends Component {
         axios({
             method: "POST",
             url: "http://localhost:5000/auth"
-        }).then((res) => {if (res.data === '/') return <Navigate to='/'/>})
+        }).then((res) => {
+            if (res.data === 'authorized') {
+                this.setLoginStatus(true)
+            }
+            else {
+                this.setLoginStatus(false)
+            }
+        })
+    }
+
+    async logOut() {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/logout"
+        }).then((res) => {
+            if (res.data === 'Success') {
+                this.setLoginStatus(false)
+            }
+        })
     }
 
     componentDidMount = () => {
@@ -35,7 +54,10 @@ class Login extends Component {
             },
             withCredentials: true,
             url: "http://localhost:5000/api/login"
-        }).then((res) => alert(res.data));
+        }).then((res) => {
+            alert(res.data)
+            this.setLoginStatus(true)
+        });
         this.resetLoginState();
     }
 
@@ -57,6 +79,12 @@ class Login extends Component {
         }
     }
 
+    setLoginStatus(loginBool) {
+        this.setState({
+            loginStatus: loginBool
+        })
+    }
+
     resetLoginState() {
         this.setState({
             loginUsername: '',
@@ -75,6 +103,14 @@ class Login extends Component {
     render() {
         return (
             <div className="Loginpage">
+                {this.state.loginStatus &&
+                <div className="login-wrapper">
+                    <p>You are logged in</p>
+                    <button onClick={this.logOut}>Log out</button>
+                </div>
+                }
+
+                {!this.state.loginStatus &&
                 <div className="login-wrapper">
                     {this.state.registerForm ? <h1>Sign up</h1> : <h1>Log in</h1>}
                     {!this.state.registerForm &&
@@ -124,6 +160,7 @@ class Login extends Component {
                         </div>
                     }
                 </div>
+                }
             </div>
         )
     }
