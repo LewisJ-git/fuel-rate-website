@@ -16,7 +16,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 
-const QuoteHistory = ({ match }) => {
+const QuoteHistory = () => {
         
     const [user_id, setUserID] = useState(0);
     useEffect(() => {
@@ -31,21 +31,21 @@ const QuoteHistory = ({ match }) => {
             }
             else {
                 if (res.data.user_id > 0) {
-                    setUserID(res.data.user_id);
+                    setUserID(res.data);
                     getQuotes();
                 }
             }
         })
     }, []);
 
-    
 
     const [quotes, setQuotes] = useState(0);
 
     const getQuotes = () => {
         axios
-            .get(`/quoteHistory/quote`, {
+            .get(`/api/quoteHistory`, {
                 params: { user_id : user_id },
+                withCredentials: true,
                 //USE user_id state for id to query
             })
             .then((res) => {
@@ -56,7 +56,6 @@ const QuoteHistory = ({ match }) => {
                 console.log(err);
             });
     };
-
 
     console.log(quotes);
 

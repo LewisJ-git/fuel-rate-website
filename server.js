@@ -26,7 +26,7 @@ app.use(
         saveUninitialized: true
     })
 );
-var quoteHistoryRouter = require("./server/routes/quoteHistory");
+//var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
 function checkSignIn(req){
     if (req.session.user) {
@@ -114,6 +114,19 @@ app.post('/auth', async (req, res) => {
     }
 })
 
+app.get("/api/quoteHistory", (req, res) => {
+  
+    let user_id = parseInt(req.session.user.id);
+    let sql = "SELECT quotes.quote_id, gallon, profiles.address1, address2, city, state, zipcode, quotes.delivery, suggestedPrice, totalPrice FROM users, profiles, quotes WHERE quotes.user_id=? AND users.user_id = profiles.user_id AND profiles.user_id = quotes.user_id;";
+  
+    let response = {};
+    db.query(sql, [user_id], (error, result) => {
+      if (error) throw error;
+      response = JSON.parse(JSON.stringify(result));
+      return res.send(response);
+    });
+});
+
 app.post('/api/profile',(req,res)=>{
     const fullname = req.body.fullname;
     const address1 =  req.body.address1;
@@ -132,7 +145,7 @@ app.post('/api/quote',(req,res)=>{
     res.sendStatus(200)
 });
 
-app.use("/quotehistory", quoteHistoryRouter);
+//app.use("/quotehistory", quoteHistoryRouter);
 
 app.listen(5000,()=>{
     console.log("Running on server 5000");
