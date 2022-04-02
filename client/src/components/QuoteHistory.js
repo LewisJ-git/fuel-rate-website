@@ -16,14 +16,23 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 const QuoteHistory = ({ match }) => {
-
-    //let user = "abc";
-    //let id = user.userID;
+        
+    const [user_id, setUserID] = useState(0);
     useEffect(() => {
         axios({
             method: "POST",
+            withCredentials: true,
             url: "http://localhost:5000/auth"
-        }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
+        }).then((res) => {
+            console.log(res.data)
+            if (res.data.message === 'unauthorized') {
+                return <Navigate to='/login'/>
+            }
+            else {
+                setUserID(res.data.user_id);
+                getQuotes();
+            }
+        })
     }, [])
 
     const [quotes, setQuotes] = useState([]);
@@ -41,10 +50,6 @@ const QuoteHistory = ({ match }) => {
                 console.log(err);
             });
     };
-
-    useEffect(() => {
-        getQuotes();
-    }, []);
 
     console.log(quotes); 
 
@@ -85,7 +90,7 @@ const QuoteHistory = ({ match }) => {
                                 </TableContainer>
                             </>
                         ) : (
-                                <Typography align="center" style={{ padding: "100px" }}>No Quotes</Typography>
+                                <Typography align="center" style={{ padding: "100px" }}>You are not logged in or No Quotes</Typography>
                             )}
                     </>                
         </div>

@@ -104,10 +104,12 @@ app.post('/auth', async (req, res) => {
     try {
         //console.log(req.session)
         if (!checkSignIn(req)) {
-            res.send('unauthorized');
+            //res.send('unauthorized');
+            res.send({user_id: -1, message: 'unauthorized'});
         }
         else {
-            res.send('authorized');
+            //res.send('authorized');
+            res.send({user_id: req.session.user.id, message: 'authorized'});
         }
     }
     catch (err) {

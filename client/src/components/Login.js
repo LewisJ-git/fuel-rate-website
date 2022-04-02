@@ -23,7 +23,7 @@ class Login extends Component {
             withCredentials: true
         }).then((res) => {
             console.log(res.data)
-            if (res.data === 'authorized') {
+            if (res.data.message === 'authorized') {
                 this.setLoginStatus(true)
             }
             else {
@@ -36,12 +36,17 @@ class Login extends Component {
         this.loginAuth()
     }
 
-    // componentDidUpdate() {
-    //     this.loginAuth()
-    // }
-
     handleLogOut = async e => {
-        this.setLoginStatus(false)
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/api/logout",
+            withCredentials: true
+        }).then((res) => {
+            if (res.data === 'Success!') {
+                this.setLoginStatus(false)
+            }
+        })
+        
     }
 
     handleLoginSubmit = async e => {
