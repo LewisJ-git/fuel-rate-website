@@ -88,7 +88,19 @@ app.post('/api/logout', (req, res) => {
 
 app.post('/api/register', async (req, res) => {
     try {
-        if (checkExistingUsers(req.body.username)) {
+        let exists = false;
+        const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${req.body.username}'`
+        db.query(sqlSelect, (err, result) => {
+            if (err) throw err
+            //console.log(result)
+            if (result.length == 0) {
+                exists = false;
+            }
+            else {
+                exists = true;
+            }
+        })
+        if (exists) {
             res.send("User already exist")
         }
         else {

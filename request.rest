@@ -8,8 +8,8 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-    "username": "long",
-    "password": "123456"
+    "username": "long2",
+    "password": "1234562"
 }
 
 
