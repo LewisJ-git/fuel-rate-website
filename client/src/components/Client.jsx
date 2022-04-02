@@ -24,7 +24,7 @@ function Client(){
     const optionList = Options.stateOptions.map((opt, key) => (
         <option key={key} values={`${opt.short}`}>{opt.full}</option>
     ));
-    const url = 'http://localhost:5000/api/profile'
+    const url = 'http://localhost:5000/api/profile' //USE user_id state for id to query
     const [data,setData] = useState({
         fullname :"",
         address1:"",

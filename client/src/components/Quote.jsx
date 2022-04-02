@@ -9,11 +9,21 @@ function Quote(){
     date:""
     })
 
+    const [user_id, setUserID] = useState(0);
     useEffect(() => {
         axios({
             method: "POST",
+            withCredentials: true,
             url: "http://localhost:5000/auth"
-        }).then((res) => {if (res.data === '/login') return <Navigate to='/login'/>})
+        }).then((res) => {
+            console.log(res.data)
+            if (res.data.message === 'unauthorized') {
+                return <Navigate to='/login'/>
+            }
+            else {
+                setUserID(res.data.user_id);
+            }
+        })
     }, [])
     
     var suggestedPrice = 3;
@@ -41,27 +51,32 @@ function Quote(){
     
     return(
     <div className='Fuelquote'>
-        <h1>Fuel Quote Form</h1>    
-        <form onSubmit={(e)=> submit(e)}>
-            <label style={{gridArea: "label1"}}>Gallon Requested</label>
-            <input style={{gridArea: "input1"}} type = "number" onChange={(e)=>handle(e)} id="gallon" value={data.gallon} placeholder="Enter number of gallons" ></input>
-            
-            <label style={{gridArea: "label2"}}>Delivery Date</label>
-            <input style={{gridArea: "input2"}} type="date" onChange={(e)=>handle(e)} id="date" value={data.date}></input>
-
-            <label style={{gridArea: "label3"}}>Delivery Address</label>
-            <input style={{gridArea: "input3"}} type="text"  placeholder="Enter the delivery address" ></input>
-
-            <label id="pricelabel1">
-                Suggested Price<h3>{suggestedPrice}</h3>
-            </label>
-
-            <label id="pricelabel2">
-                Total Price
-                <h3>{totalAmount}</h3>
-            </label>
-            <button style={{gridArea: "but"}} type="submit">Submit</button>
-        </form>
+        {user_id === 0 ? 
+            <p>You are not logged in</p> :
+            <>
+                <h1>Fuel Quote Form</h1>    
+                <form onSubmit={(e)=> submit(e)}>
+                    <label style={{gridArea: "label1"}}>Gallon Requested</label>
+                    <input style={{gridArea: "input1"}} type = "number" onChange={(e)=>handle(e)} id="gallon" value={data.gallon} placeholder="Enter number of gallons" ></input>
+                    
+                    <label style={{gridArea: "label2"}}>Delivery Date</label>
+                    <input style={{gridArea: "input2"}} type="date" onChange={(e)=>handle(e)} id="date" value={data.date}></input>
+                
+                    <label style={{gridArea: "label3"}}>Delivery Address</label>
+                    <input style={{gridArea: "input3"}} type="text"  placeholder="Enter the delivery address" ></input>
+                
+                    <label id="pricelabel1">
+                        Suggested Price<h3>{suggestedPrice}</h3>
+                    </label>
+                
+                    <label id="pricelabel2">
+                        Total Price
+                        <h3>{totalAmount}</h3>
+                    </label>
+                    <button style={{gridArea: "but"}} type="submit">Submit</button>
+                </form>
+            </>
+        }
     </div>
 
     )
