@@ -28,21 +28,6 @@ app.use(
 );
 var quoteHistoryRouter = require("./server/routes/quoteHistory");
 
-var current_user_id;
-
-async function checkExistingUsers(inputUsername) {
-    let exists = true;
-    const sqlSelect = `SELECT * FROM ${db_users} WHERE username='${inputUsername}'`
-    db.query(sqlSelect, (err, result) => {
-        if (err) throw err
-        //console.log(result)
-        if (result.length == 0) {
-            exists = false;
-        }
-    })
-    return exists;
-}
-
 function checkSignIn(req){
     if (req.session.user) {
         return true;
