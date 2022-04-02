@@ -46,7 +46,6 @@ class Login extends Component {
                 this.setLoginStatus(false)
             }
         })
-        
     }
 
     handleLoginSubmit = async e => {

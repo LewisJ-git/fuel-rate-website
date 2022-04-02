@@ -41,6 +41,7 @@ const QuoteHistory = ({ match }) => {
         axios
             .get(`/quoteHistory/quote`, {
                 //params: { id: abc },
+                //USE user_id state for id to query
             })
             .then((res) => {
                 console.log(res);
