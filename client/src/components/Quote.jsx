@@ -21,7 +21,9 @@ function Quote(){
                 return <Navigate to='/login'/>
             }
             else {
-                setUserID(res.data.user_id);
+                if (res.data.user_id > 0) {
+                    setUserID(res.data.user_id);
+                }
             }
         })
     }, [])
