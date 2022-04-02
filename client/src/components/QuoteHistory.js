@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 
 import {
     Typography,
@@ -15,6 +15,7 @@ import TableRow from "@material-ui/core/TableRow";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
+
 const QuoteHistory = ({ match }) => {
         
     const [user_id, setUserID] = useState(0);
@@ -24,23 +25,23 @@ const QuoteHistory = ({ match }) => {
             withCredentials: true,
             url: "http://localhost:5000/auth"
         }).then((res) => {
-            console.log(res.data)
-            if (res.data.message === 'unauthorized') {
+            console.log(res.data);
+            if (res.data.message === 'unauthorized') {             
                 return <Navigate to='/login'/>
             }
             else {
-                setUserID(res.data.user_id);
-                getQuotes();
+                setUserID(res.data.user_id);          
             }
         })
-    }, [])
+        getQuotes();
+    }, []);
 
-    const [quotes, setQuotes] = useState([]);
+    const [quotes, setQuotes] = useState(0);
 
     const getQuotes = () => {
         axios
             .get(`/quoteHistory/quote`, {
-                //params: { id: abc },
+                params: { user_id : user_id },
                 //USE user_id state for id to query
             })
             .then((res) => {
@@ -52,7 +53,8 @@ const QuoteHistory = ({ match }) => {
             });
     };
 
-    console.log(quotes); 
+
+    console.log(quotes);
 
     return (
         <div style={{ padding: "100px" }}>            
@@ -77,13 +79,13 @@ const QuoteHistory = ({ match }) => {
                                         </TableHead>
                                         <TableBody>
                                             {quotes.map((quote) => (
-                                                <TableRow key={quote.id}>
-                                                    <TableCell align = "left" component="th" scope="row">{"#" + quote.id}</TableCell>
-                                                    <TableCell align="left">{quote.gallons_requested}</TableCell>
-                                                    <TableCell align="left">{quote.delivery_address}</TableCell>
-                                                    <TableCell align="left">{quote.delivery_date}</TableCell>                                            
-                                                    <TableCell align="right">{"$" + quote.suggested_price}</TableCell>
-                                                    <TableCell align="right">{"$" + quote.total_due}</TableCell>                                               
+                                                <TableRow key={quote.quote_id}>
+                                                    <TableCell align = "left" component="th" scope="row">{"#" + quote.quote_id}</TableCell>
+                                                    <TableCell align="left">{quote.gallon}</TableCell>
+                                                    <TableCell align="left">{quote.address1} {quote.address2}, {quote.city}, {quote.state}, {quote.zipcode}</TableCell>
+                                                    <TableCell align="left">{quote.delivery.toString().split("T")[0]}</TableCell>                                            
+                                                    <TableCell align="right">{"$" + quote.suggestedPrice}</TableCell>
+                                                    <TableCell align="right">{"$" + quote.totalPrice}</TableCell>                                               
                                                 </TableRow>
                                             ))}
                                         </TableBody>
