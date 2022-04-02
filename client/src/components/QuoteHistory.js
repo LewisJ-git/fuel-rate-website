@@ -25,16 +25,20 @@ const QuoteHistory = ({ match }) => {
             withCredentials: true,
             url: "http://localhost:5000/auth"
         }).then((res) => {
-            console.log(res.data);
-            if (res.data.message === 'unauthorized') {             
+            console.log(res.data.user_id);
+            if (res.data.message === 'unauthorized') {
                 return <Navigate to='/login'/>
             }
             else {
-                setUserID(res.data.user_id);          
+                if (res.data.user_id > 0) {
+                    setUserID(res.data.user_id);
+                    getQuotes();
+                }
             }
         })
-        getQuotes();
     }, []);
+
+    
 
     const [quotes, setQuotes] = useState(0);
 
@@ -57,7 +61,8 @@ const QuoteHistory = ({ match }) => {
     console.log(quotes);
 
     return (
-        <div style={{ padding: "100px" }}>            
+        <div style={{ padding: "100px" }}>
+                    {/* <h1>{user_id}</h1>             */}
                     <>
                         {quotes.length > 0 ? (
                             <>
