@@ -12,6 +12,7 @@ const db_users = 'GasPriceGroupTen.users';
 app.use(express.json());
 app.use(cors({
     origin: "http://localhost:3000",
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
     credentials: true
 }));
 app.use(bodyParser.json());
@@ -63,6 +64,7 @@ app.post('/api/login', (req, res) => {
                     req.session.user = {id: result[0].user_id};
                     //console.log(req.session.user)
                     authBool = true;
+                    //res.send(req.session.user);
                     res.send("Success")
                 }
                 else {
@@ -77,14 +79,8 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/logout', (req, res) => {
     try {
-        if (!checkSignIn(req)) {
-            res.send("You are not logged in")
-        }
-        else {
-            req.session.destroy(function(){
-                res.send("Success")
-            });
-        }
+        req.session.destroy()
+        res.send("Success!")
     } catch (err) {
         console.log(err)
     }

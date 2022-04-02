@@ -19,8 +19,10 @@ class Login extends Component {
     async loginAuth() {
         axios({
             method: "POST",
-            url: "http://localhost:5000/auth"
+            url: "http://localhost:5000/auth",
+            withCredentials: true
         }).then((res) => {
+            console.log(res.data)
             if (res.data === 'authorized') {
                 this.setLoginStatus(true)
             }
@@ -30,19 +32,16 @@ class Login extends Component {
         })
     }
 
-    async logOut() {
-        axios({
-            method: "POST",
-            url: "http://localhost:5000/logout"
-        }).then((res) => {
-            if (res.data === 'Success') {
-                this.setLoginStatus(false)
-            }
-        })
-    }
-
     componentDidMount = () => {
         this.loginAuth()
+    }
+
+    // componentDidUpdate() {
+    //     this.loginAuth()
+    // }
+
+    handleLogOut = async e => {
+        this.setLoginStatus(false)
     }
 
     handleLoginSubmit = async e => {
@@ -58,6 +57,7 @@ class Login extends Component {
             alert(res.data)
             this.setLoginStatus(true)
         });
+        //setToken(token);
         this.resetLoginState();
     }
 
@@ -106,7 +106,9 @@ class Login extends Component {
                 {this.state.loginStatus &&
                 <div className="login-wrapper">
                     <p>You are logged in</p>
-                    <button onClick={this.logOut}>Log out</button>
+                    <form onSubmit={this.handleLogOut}>
+                        <button type='submit'>Log out</button>
+                    </form>
                 </div>
                 }
 
@@ -165,4 +167,6 @@ class Login extends Component {
         )
     }
 }
+
+
 export default Login
