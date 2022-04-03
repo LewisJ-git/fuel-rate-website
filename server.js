@@ -135,6 +135,21 @@ app.post('/api/profile',(req,res)=>{
     const state = req.body.state;
     const zipcode = req.body.zipcode;
     res.sendStatus(200)
+    //const user_id = parseInt(req.session.user.id);
+    const user_id = 7;
+    console.log(user_id);
+
+    const sqlInsert = "INSERT INTO GasPriceGroupTen.profiles (fullname, address1, address2, city, state, zipcode, user_id) VALUES (?,?,?,?,?,?,?)";
+    db.query(sqlInsert,[fullname,address1,address2,city,state,zipcode,user_id],(err,result)=>{
+        console.log(result);
+    });
+});
+
+app.get('/api/getClient', (req,res)=>{
+    const slqSelect = "SELECT * FROM GasPriceGroupTen.profiles WHERE user_id= ?";
+    db.query(slqSelect,7,(err,result)=>{
+        res.send(result);
+    });
 });
 
 app.post('/api/quote',(req,res)=>{
