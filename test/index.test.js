@@ -16,6 +16,16 @@ describe('Index page test', () => {
   });
 });
 
+/*Get Test*/
+describe("Testing the get request for User Account Infomation", () => {
+  test("It should get a response of 200", () => {
+    return supertest(app)
+      .get("/api/getClient")
+      .then((result) => {
+        expect(result.statusCode).toBe(200);
+      });
+  });
+});
 
 /*Post Test */
 describe("Testing the post request for the Fuel Quote Form", () => {
