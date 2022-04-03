@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Navigate } from "react-router-dom";
 
 function Quote(){
-    const url = 'http://localhost:3001/quote'
+    const url = 'http://localhost:5000/api/quote'
     const [data,setData]= useState({
     gallon:"",
     date:""
@@ -23,11 +23,33 @@ function Quote(){
             else {
                 if (res.data.user_id > 0) {
                     setUserID(res.data.user_id);
+                    getClient();
                 }
             }
         })
     }, [])
     
+    const [clientInfo,setclientInfo]= useState([]);
+    
+    const getClient = () => {
+        axios
+            .get(`/api/getClient`, {
+                params: { user_id : 7 },
+                withCredentials: true,
+                //USE user_id state for id to query
+            })
+            .then((res) => {
+               //console.log(res);
+                setclientInfo(res.data);
+                
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    
+    console.log(clientInfo);
+     
     var suggestedPrice = 3;
     var totalAmount = 180; 
     function handle(e){
@@ -65,7 +87,12 @@ function Quote(){
                     <input style={{gridArea: "input2"}} type="date" onChange={(e)=>handle(e)} id="date" value={data.date}></input>
                 
                     <label style={{gridArea: "label3"}}>Delivery Address</label>
-                    <input style={{gridArea: "input3"}} type="text"  placeholder="Enter the delivery address" ></input>
+                     {clientInfo.map((val,i,row)=>{
+                        if (i+1===row.length){
+                            return <label style={{gridArea: "input3"}}>{val.address1}, {val.city}, {val.state}</label>
+                        }
+                        
+                    })}
                 
                     <label id="pricelabel1">
                         Suggested Price<h3>{suggestedPrice}</h3>
