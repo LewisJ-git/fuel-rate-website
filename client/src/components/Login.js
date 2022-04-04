@@ -143,18 +143,21 @@ class Login extends Component {
                         <div className="form-wrapper">
                             <form onSubmit={this.handleRegisterSubmit}>
                                 <input 
+                                    minlength='1'
                                     autoComplete='off' 
                                     type='text' 
                                     value={this.state.registerUsername} 
                                     onChange={(event) => {this.setState({registerUsername: event.target.value})}}
                                     placeholder='Username'/>
                                 <input 
+                                    minlength='1'
                                     autoComplete='off' 
                                     type='password' 
                                     value={this.state.registerPassword} 
                                     onChange={(event) => {this.setState({registerPassword: event.target.value})}}
                                     placeholder='Password'/>
                                 <input 
+                                    minlength='1'
                                     autoComplete='off' 
                                     type='password' 
                                     value={this.state.registerPasswordConfirm} 
