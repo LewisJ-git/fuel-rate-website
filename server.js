@@ -135,8 +135,8 @@ app.post('/api/profile',(req,res)=>{
     const state = req.body.state;
     const zipcode = req.body.zipcode;
     res.sendStatus(200)
-    //const user_id = parseInt(req.session.user.id);
-    const user_id = 7;
+    let user_id = parseInt(req.session.user.id);
+    //const user_id = 7;
     console.log(user_id);
 
     const sqlInsert = "INSERT INTO GasPriceGroupTen.profiles (fullname, address1, address2, city, state, zipcode, user_id) VALUES (?,?,?,?,?,?,?)";
