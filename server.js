@@ -147,7 +147,8 @@ app.post('/api/profile',(req,res)=>{
 
 app.get('/api/getClient', (req,res)=>{
     const slqSelect = "SELECT * FROM GasPriceGroupTen.profiles WHERE user_id= ?";
-    db.query(slqSelect,7,(err,result)=>{
+    let user_id = parseInt(req.session.user.id);
+    db.query(slqSelect,user_id,(err,result)=>{
         res.send(result);
     });
 });
