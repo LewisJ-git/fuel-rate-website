@@ -117,6 +117,7 @@ app.post('/auth', async (req, res) => {
 app.get("/api/quoteHistory", (req, res) => {
   
     let user_id = parseInt(req.session.user.id);
+    //let user_id = 11;
     let sql = "SELECT quotes.quote_id, gallon, profiles.address1, address2, city, state, zipcode, quotes.delivery, suggestedPrice, totalPrice FROM users, profiles, quotes WHERE quotes.user_id=? AND users.user_id = profiles.user_id AND profiles.user_id = quotes.user_id;";
   
     let response = {};
@@ -128,6 +129,7 @@ app.get("/api/quoteHistory", (req, res) => {
 });
 
 app.post('/api/profile',(req,res)=>{
+    let user_id = parseInt(req.session.user.id);
     const fullname = req.body.fullname;
     const address1 =  req.body.address1;
     const address2 = req.body.address2;
@@ -135,9 +137,9 @@ app.post('/api/profile',(req,res)=>{
     const state = req.body.state;
     const zipcode = req.body.zipcode;
     res.sendStatus(200)
-    let user_id = parseInt(req.session.user.id);
-    //const user_id = 7;
-    console.log(user_id);
+    
+    //const user_id = 11;
+    
 
     const sqlInsert = "INSERT INTO GasPriceGroupTen.profiles (fullname, address1, address2, city, state, zipcode, user_id) VALUES (?,?,?,?,?,?,?)";
     db.query(sqlInsert,[fullname,address1,address2,city,state,zipcode,user_id],(err,result)=>{
@@ -148,18 +150,30 @@ app.post('/api/profile',(req,res)=>{
 app.get('/api/getClient', (req,res)=>{
     const slqSelect = "SELECT * FROM GasPriceGroupTen.profiles WHERE user_id= ?";
     let user_id = parseInt(req.session.user.id);
+    //let user_id= 11;
     db.query(slqSelect,user_id,(err,result)=>{
         res.send(result);
     });
 });
 
 app.post('/api/quote',(req,res)=>{
+    let user_id = parseInt(req.session.user.id);
     const gallon = req.body.gallon;
     const deliverDate = req.body.date;
+    const suggestPrice = req.body.suggestedPrice;
+    const totalPrice = req.body.totalPrice;
     console.log(gallon)
     console.log(deliverDate)
-    res.sendStatus(200)
+    console.log(suggestPrice)
+    console.log(totalPrice);
+    //let user_id = 11;
+    const sqlInsert = `INSERT INTO GasPriceGroupTen.quotes (gallon, delivery, suggestedPrice, totalPrice, user_id) VALUES ('${req.body.gallon}', '${req.body.date}','${req.body.suggestedPrice}','${req.body.totalPrice}','${user_id}')`;
+    db.query(sqlInsert,(err,result)=>{
+        console.log(result);
+    });
 });
+
+
 
 //app.use("/quotehistory", quoteHistoryRouter);
 
