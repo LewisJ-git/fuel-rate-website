@@ -42,8 +42,9 @@ function Client(){
         setData(newData)
         console.log(newData);
     }
-
+   
     function submit(e){
+        alert('Your information has been saved');
         e.preventDefault();
         axios.post(url,{
             fullname :data.fullname,
@@ -56,6 +57,7 @@ function Client(){
         .then(res=>{
             console.log(res.data);
         })
+       
     }
     return(
         <div className="Clientpage">
