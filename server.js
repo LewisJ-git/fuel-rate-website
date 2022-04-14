@@ -27,6 +27,7 @@ app.use(
     })
 );
 //var quoteHistoryRouter = require("./server/routes/quoteHistory");
+let user_test_id="";
 
 function checkSignIn(req){
     if (req.session.user) {
@@ -107,6 +108,8 @@ app.post('/auth', async (req, res) => {
         else {
             //res.send('authorized');
             res.send({user_id: req.session.user.id, message: 'authorized'});
+            user_test_id = req.session.user.id;
+            //console.log(user_test_id);
         }
     }
     catch (err) {
@@ -129,35 +132,38 @@ app.get("/api/quoteHistory", (req, res) => {
 });
 
 app.post('/api/profile',(req,res)=>{
-    let user_id = parseInt(req.session.user.id);
+    //let user_id = parseInt(req.session.user.id);
+    
     const fullname = req.body.fullname;
     const address1 =  req.body.address1;
     const address2 = req.body.address2;
     const city =  req.body.city;
     const state = req.body.state;
     const zipcode = req.body.zipcode;
-    res.sendStatus(200)
+    //console.log(user_id);
+    console.log(zipcode);
+    //res.sendStatus(200)
     
     //const user_id = 11;
     
 
     const sqlInsert = "INSERT INTO GasPriceGroupTen.profiles (fullname, address1, address2, city, state, zipcode, user_id) VALUES (?,?,?,?,?,?,?)";
-    db.query(sqlInsert,[fullname,address1,address2,city,state,zipcode,user_id],(err,result)=>{
+    db.query(sqlInsert,[fullname,address1,address2,city,state,zipcode,user_test_id],(err,result)=>{
         console.log(result);
     });
 });
 
 app.get('/api/getClient', (req,res)=>{
     const slqSelect = "SELECT * FROM GasPriceGroupTen.profiles WHERE user_id= ?";
-    let user_id = parseInt(req.session.user.id);
+    //let user_id = parseInt(req.session.user.id);
     //let user_id= 11;
-    db.query(slqSelect,user_id,(err,result)=>{
+    db.query(slqSelect,user_test_id,(err,result)=>{
         res.send(result);
     });
 });
 
 app.post('/api/quote',(req,res)=>{
-    let user_id = parseInt(req.session.user.id);
+    //let user_id = parseInt(req.session.user.id);
     const gallon = req.body.gallon;
     const deliverDate = req.body.date;
     const suggestPrice = req.body.suggestedPrice;
@@ -167,7 +173,7 @@ app.post('/api/quote',(req,res)=>{
     console.log(suggestPrice)
     console.log(totalPrice);
     //let user_id = 11;
-    const sqlInsert = `INSERT INTO GasPriceGroupTen.quotes (gallon, delivery, suggestedPrice, totalPrice, user_id) VALUES ('${req.body.gallon}', '${req.body.date}','${req.body.suggestedPrice}','${req.body.totalPrice}','${user_id}')`;
+    const sqlInsert = `INSERT INTO GasPriceGroupTen.quotes (gallon, delivery, suggestedPrice, totalPrice, user_id) VALUES ('${req.body.gallon}', '${req.body.date}','${req.body.suggestedPrice}','${req.body.totalPrice}','${user_test_id}')`;
     db.query(sqlInsert,(err,result)=>{
         console.log(result);
     });
@@ -180,3 +186,4 @@ app.post('/api/quote',(req,res)=>{
 app.listen(5000,()=>{
     console.log("Running on server 5000");
 });
+
