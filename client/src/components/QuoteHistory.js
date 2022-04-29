@@ -71,7 +71,7 @@ const QuoteHistory = () => {
                                         {`Quote History`}</Typography>
                                     <TableContainer
                                         component={Paper}
-                                        style={{ width: 1165, paddingTop: "0px" }}>
+                                        style={{ width: 1720, paddingTop: "0px" }}>
                                         <Table aria-label="simple table">
                                             <TableHead>
                                                 <TableRow>
