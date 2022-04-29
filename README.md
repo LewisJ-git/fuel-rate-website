@@ -5,7 +5,8 @@
 1. Run 'npm install' in the project directory.
 2. cd into "client" folder and run 'npm install axios'
 3. cd ".." back to the project directory.
-4. Run 'npm run dev' to run the app.
+4. Run 'npm install mysql' to connect to the database.
+5. Run 'npm run dev' to run the app.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
