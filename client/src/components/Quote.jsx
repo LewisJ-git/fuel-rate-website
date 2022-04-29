@@ -95,7 +95,7 @@ function Quote(){
     //Pricing Module
     const margin = (1.5) * ((isInState ? 0.02 : 0.04)- (hasPreviousQuote ? 0.01 : 0.00) + (data.gallon > 1000 ? 0.02 : 0.03) + 0.10);
     const suggestedPrice=(1.5 + margin).toFixed(2);
-    const totalPrice=suggestedPrice* data.gallon;
+    const totalPrice=(suggestedPrice* data.gallon).toFixed(2);
     
     function handle(e){
         const newData = {...data}
@@ -140,19 +140,19 @@ function Quote(){
                         
                         {clientInfo.map((val,i,row)=>{
                         if (i+1===row.length){
-                            return <label style={{gridArea: "input3"}}>{val.address1}, {val.city}, {val.state}</label>
+                            return <label style={{gridArea: "input3"}}>{val.address1} {val.address2}, {val.city}, {val.state}, {val.zipcode}</label>
                         }
                         
                     })}
                             
                     
                         <label id="pricelabel1">
-                            Suggested Price<h3>{suggestedPrice}</h3>
+                            Suggested Price<h3>{"$" + suggestedPrice}</h3>
                         </label>
                     
                         <label id="pricelabel2">
                             Total Price
-                            <h3>{totalPrice}</h3>
+                            <h3>{"$" + totalPrice}</h3>
                         </label>
                         <button style={{gridArea: "but"}} type="submit">Submit</button>
                     </form>
