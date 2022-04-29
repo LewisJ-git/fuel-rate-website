@@ -60,6 +60,7 @@ function Quote(){
 
     //get cliet info
     const [clientInfo,setclientInfo]= useState([]);
+    const [isInState, setIsInState] = useState(false);
     const getClient = () => {
         axios
             .get(`/api/getClient`, {
@@ -70,7 +71,9 @@ function Quote(){
             .then((res) => {
                //console.log(res);
                 setclientInfo(res.data);
-                
+                if(res.data[res.data.length - 1].state==="Texas"){
+                    setIsInState(true);
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -78,19 +81,8 @@ function Quote(){
     };
     
     
-    const [isInState, setIsInState] = useState(false);
     
-    {clientInfo.map((val,i,row)=>{
-        if (i+1===row.length){
-            if(val.state==="Texas"){
-                setIsInState(true);
-                
-            }
-            
-        }
-        
-    })}
-
+   
     
     //Pricing Module
     const margin = (1.5) * ((isInState ? 0.02 : 0.04)- (hasPreviousQuote ? 0.01 : 0.00) + (data.gallon > 1000 ? 0.02 : 0.03) + 0.10);
@@ -144,8 +136,6 @@ function Quote(){
                         }
                         
                     })}
-                            
-                    
                         <label id="pricelabel1">
                             Suggested Price<h3>{"$" + suggestedPrice}</h3>
                         </label>
