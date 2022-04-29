@@ -8,12 +8,8 @@ const db = mysql.createConnection({
   acquireTimeout: 1000000,
 });
 
-db.connect((err) => {
-  if (err) {
-    throw err;
-  } else {
+db.connect(() => {
     console.log("Connected to database");
-  }
 });
 
 module.exports = db;
