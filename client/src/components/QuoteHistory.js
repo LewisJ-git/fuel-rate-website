@@ -60,47 +60,52 @@ const QuoteHistory = () => {
     console.log(quotes);
 
     return (
-        <div style={{ padding: "100px" }}>
-                    {/* <h1>{user_id}</h1>             */}
-                    <>
-                        {quotes.length > 0 ? (
-                            <>
-                                <Typography align="center" style={{fontSize: 30, backgroundColor: '#819595', color: 'white', padding: "10px", fontWeight: "bold" }}>
-                                    {`Quote History`}</Typography>
-                                <TableContainer
-                                    component={Paper}
-                                    style={{ width: 1165, paddingTop: "0px" }}>
-                                    <Table aria-label="simple table">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Quote ID</TableCell>
-                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Gallons Requested</TableCell>
-                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Address</TableCell>
-                                                <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Date</TableCell>
-                                                <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Suggested Price / gallon</TableCell>
-                                                <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Total Due</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {quotes.map((quote) => (
-                                                <TableRow key={quote.quote_id}>
-                                                    <TableCell align = "left" component="th" scope="row">{"#" + quote.quote_id}</TableCell>
-                                                    <TableCell align="left">{quote.gallon}</TableCell>
-                                                    <TableCell align="left">{quote.address1} {quote.address2}, {quote.city}, {quote.state}, {quote.zipcode}</TableCell>
-                                                    <TableCell align="left">{quote.delivery.toString().split("T")[0]}</TableCell>                                            
-                                                    <TableCell align="right">{"$" + quote.suggestedPrice}</TableCell>
-                                                    <TableCell align="right">{"$" + quote.totalPrice}</TableCell>                                               
+        <>
+        { user_id === 0 ?
+            <p id='login-message-history'>You are not logged in</p> :
+            <div style={{ padding: "100px" }}>
+                        <>
+                            {quotes.length > 0 ? (
+                                <>
+                                    <Typography align="center" style={{fontSize: 30, backgroundColor: '#819595', color: 'white', padding: "10px", fontWeight: "bold" }}>
+                                        {`Quote History`}</Typography>
+                                    <TableContainer
+                                        component={Paper}
+                                        style={{ width: 1165, paddingTop: "0px" }}>
+                                        <Table aria-label="simple table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Quote ID</TableCell>
+                                                    <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Gallons Requested</TableCell>
+                                                    <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Address</TableCell>
+                                                    <TableCell align="left" style={{backgroundColor: '#696773', color: 'white'}}>Delivery Date</TableCell>
+                                                    <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Suggested Price / gallon</TableCell>
+                                                    <TableCell align="right" style={{backgroundColor: '#696773', color: 'white'}}>Total Due</TableCell>
                                                 </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </>
-                        ) : (
-                                <Typography align="center" style={{ padding: "100px" }}>You are not logged in or No Quotes</Typography>
-                            )}
-                    </>                
-        </div>
+                                            </TableHead>
+                                            <TableBody>
+                                                {quotes.map((quote) => (
+                                                    <TableRow key={quote.quote_id}>
+                                                        <TableCell align = "left" component="th" scope="row">{"#" + quote.quote_id}</TableCell>
+                                                        <TableCell align="left">{quote.gallon}</TableCell>
+                                                        <TableCell align="left">{quote.address1} {quote.address2}, {quote.city}, {quote.state}, {quote.zipcode}</TableCell>
+                                                        <TableCell align="left">{quote.delivery.toString().split("T")[0]}</TableCell>                                            
+                                                        <TableCell align="right">{"$" + quote.suggestedPrice}</TableCell>
+                                                        <TableCell align="right">{"$" + quote.totalPrice}</TableCell>                                               
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                </>
+                            ) : (
+                                    <Typography align="center" style={{ padding: "100px" }}>No Quotes</Typography>
+                                )}
+                        </>
+
+            </div>
+        }
+        </>
     );
 };
 

@@ -59,7 +59,9 @@ class Login extends Component {
             url: "http://localhost:5000/api/login"
         }).then((res) => {
             alert(res.data)
-            this.setLoginStatus(true)
+            if (res.data === 'Success') {
+                this.setLoginStatus(true)
+            }
         });
         //setToken(token);
         this.resetLoginState();

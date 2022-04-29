@@ -199,6 +199,19 @@ select {
   background-size: cover;
 }
 
+.Loginpage button[type=submit] {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  background-color: #819595;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: brightness;
+  transition: brightness;
+}
+
 .Loginpage .login-wrapper {
   -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideUpCustom;
           animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideUpCustom;
@@ -269,19 +282,6 @@ select {
   grid-area: but;
 }
 
-.Loginpage .login-wrapper .form-wrapper button[type=submit] {
-  margin-top: 20px;
-  font-size: 1.1rem;
-  padding: 8px 12px;
-  background-color: #819595;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  -webkit-transition: brightness;
-  transition: brightness;
-}
-
 .Loginpage .login-wrapper .form-wrapper button[type=submit]:hover {
   -webkit-filter: brightness(70%);
           filter: brightness(70%);
@@ -339,6 +339,14 @@ select {
   display: -ms-grid;
   display: grid;
       grid-template-areas: 'header header header' '. x .';
+}
+
+.Fuelquote #login-message {
+  text-align: center;
+  font-size: 2rem;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: x;
 }
 
 .Fuelquote h1 {
@@ -411,6 +419,11 @@ select {
   height: 100vh;
 }
 
+.Clientpage #login-message {
+  text-align: center;
+  font-size: 2rem;
+}
+
 .Clientpage .client-wrapper {
   position: absolute;
   top: 120px;
@@ -472,5 +485,13 @@ select {
   cursor: pointer;
   -webkit-transition: brightness;
   transition: brightness;
+}
+
+#login-message-history {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 120px;
+  -webkit-animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
+          animation: 1s cubic-bezier(0, 0.7, 0.58, 1) 0s 1 slideDown;
 }
 /*# sourceMappingURL=index.css.map */

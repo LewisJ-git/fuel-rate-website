@@ -143,6 +143,17 @@ select {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(105, 103, 115, 0.5)), url("/src/images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    button[type=submit] {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+        background-color: $highlight-dark;
+        color: $primary-color;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: brightness;
+    }
     .login-wrapper {
         animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideUpCustom;
         position: absolute;
@@ -188,17 +199,6 @@ select {
                 #3, #4 {
                     grid-area: but;
                 }
-            }
-            button[type=submit] {
-                margin-top: 20px;
-                font-size: 1.1rem;
-                padding: 8px 12px;
-                background-color: $highlight-dark;
-                color: $primary-color;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: brightness;
             }
             button[type=submit]:hover {
                 filter: brightness(70%);
@@ -253,6 +253,11 @@ select {
     grid-template-areas:
         'header header header'
         '. x .';
+    #login-message {
+        text-align: center;
+        font-size: 2rem;
+        grid-area: x;
+    }
     h1 {
         width: 100%;
         background-color: $highlight-dark;
@@ -309,6 +314,10 @@ select {
     background: linear-gradient(90deg, rgba(129,149,149,0.8) 0%, rgba(177,182,166,0.8) 100%);
     width: 100%;
     height: 100vh;
+    #login-message {
+        text-align: center;
+        font-size: 2rem;
+    }
     .client-wrapper {
         position: absolute;
         top: 120px;
@@ -363,4 +372,11 @@ select {
             }
         }
     }
+}
+
+#login-message-history {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 120px;
+    animation: 1s cubic-bezier(0, 0.7, 0.58, 1.0) 0s 1 slideDown;
 }
