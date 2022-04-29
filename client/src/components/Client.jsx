@@ -63,7 +63,7 @@ function Client(){
         <div className="Clientpage">
             <div className='client-wrapper'>
                 {user_id === 0 ?
-                    <p>You are not logged in</p> :
+                    <p id='login-message'>You are not logged in</p> :
                     <>
                         <h1>Client Profile Management</h1>
                         <form onSubmit={(e)=> submit(e)}>
