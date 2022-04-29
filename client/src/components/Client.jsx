@@ -85,7 +85,7 @@ function Client(){
                             </select>
 
                             <label style={{gridArea: "label6", marginTop: "20px"}}>Zipcode</label>
-                            <input type = "text" onChange={(e)=>handle(e)} id="zipcode" value={data.zipcode} minLength ="5" maxLength = "9" placeholder="Enter your zipcode" style={{gridArea: "input6"}}/>
+                            <input type = "number" onChange={(e)=>handle(e)} id="zipcode" value={data.zipcode} minLength ="5" maxLength = "9" placeholder="Enter your zipcode" style={{gridArea: "input6"}}/>
 
                             <button style={{gridArea: "but"}} type="submit">Save</button>
                         </form>
